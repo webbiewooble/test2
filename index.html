@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Designer Portfolio</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React & ReactDOM -->
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Framer Motion -->
+  <script src="https://unpkg.com/framer-motion@11.0.0/dist/framer-motion.js"></script>
+  
+  <!-- Fix for lucide-react UMD expecting window.react instead of window.React -->
+  <script>window.react = window.React;</script>
+
+  <!-- Lucide React -->
+  <script src="https://unpkg.com/lucide-react@0.344.0/dist/umd/lucide-react.min.js"></script>
+
+  <!-- Babel for compiling JSX in the browser -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-50">
+  <div id="root"></div>
+
+  <!-- Application Code -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { createRoot } = ReactDOM;
+    const { useInView } = window.Motion;
+    const { Code, Layout, MonitorSmartphone, Palette, ArrowRight, Github, Twitter, Linkedin } = window.LucideReact;
+
+    // --- SpecialText Component ---
+    const RANDOM_CHARS = "_!X$0-+*#";
+
+    function getRandomChar(prevChar) {
+      let char;
+      do {
+        char = RANDOM_CHARS[Math.floor(Math.random() * RANDOM_CHARS.length)];
+      } while (char === prevChar);
+      return char;
+    }
+
+    function SpecialText({ children, speed = 20, delay = 0, className = "", inView = false, once = true }) {
+      const containerRef = useRef(null);
+      const isInView = useInView(containerRef, { once, margin: "-100px" });
+      const shouldAnimate = inView ? isInView : true;
+      const [hasStarted, setHasStarted] = useState(() => !inView && delay <= 0);
+      const text = children;
+      const [displayText, setDisplayText] = useState(" ".repeat(text.length));
+      const [currentPhase, setCurrentPhase] = useState("phase1");
+      const [animationStep, setAnimationStep] = useState(0);
+      const intervalRef = useRef(null);
+      const startTimeoutRef = useRef(null);
+
+      function clearStartTimeout() {
+        if (startTimeoutRef.current === null) return;
+        window.clearTimeout(startTimeoutRef.current);
+        startTimeoutRef.current = null;
+      }
+
+      function startAnimation() {
+        setHasStarted(true);
+        setDisplayText(" ".repeat(text.length));
+        setCurrentPhase("phase1");
+        setAnimationStep(0);
+      }
+
+      const runPhase1 = () => {
+        const maxSteps = text.length * 2;
+        const currentLength = Math.min(animationStep + 1, text.length);
+        const chars = [];
+        for (let i = 0; i < currentLength; i++) {
+          const prevChar = i > 0 ? chars[i - 1] : undefined;
+          chars.push(text[i] === " " ? " " : getRandomChar(prevChar));
+        }
+        for (let i = currentLength; i < text.length; i++) {
+          chars.push(text[i] === " " ? " " : "_");
+        }
+        setDisplayText(chars.join(""));
+        if (animationStep < maxSteps - 1) {
+          setAnimationStep((prev) => prev + 1);
+        } else {
+          setCurrentPhase("phase2");
+          setAnimationStep(0);
+        }
+      };
+
+      const runPhase2 = () => {
+        const revealedCount = Math.floor(animationStep / 2);
+        const chars = [];
+        for (let i = 0; i < revealedCount && i < text.length; i++) {
+          chars.push(text[i]);
+        }
+        if (revealedCount < text.length) {
+          if (animationStep % 2 === 0) {
+            chars.push(text[revealedCount] === " " ? " " : "_");
+          } else {
+            chars.push(text[revealedCount] === " " ? " " : getRandomChar());
+          }
+        }
+        for (let i = chars.length; i < text.length; i++) {
+          chars.push(text[i] === " " ? " " : getRandomChar());
+        }
+        setDisplayText(chars.join(""));
+        if (animationStep < text.length * 2 - 1) {
+          setAnimationStep((prev) => prev + 1);
+        } else {
+          setDisplayText(text);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+        }
+      };
+
+      useEffect(() => {
+        if (shouldAnimate && !hasStarted) {
+          clearStartTimeout();
+          if (delay <= 0) {
+            startAnimation();
+            return;
+          }
+          startTimeoutRef.current = window.setTimeout(() => {
+            startTimeoutRef.current = null;
+            startAnimation();
+          }, delay * 1000);
+        }
+        return () => clearStartTimeout();
+      }, [shouldAnimate, hasStarted, delay, text.length]);
+
+      useEffect(() => {
+        if (!hasStarted) return;
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+          if (currentPhase === "phase1") runPhase1();
+          else runPhase2();
+        }, speed);
+        return () => {
+          if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+      }, [currentPhase, animationStep, text, speed, hasStarted]);
+
+      useEffect(() => {
+        if (hasStarted) {
+          setDisplayText(" ".repeat(text.length));
+          setCurrentPhase("phase1");
+          setAnimationStep(0);
+        }
+        return () => {
+          clearStartTimeout();
+          if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+      }, [text, hasStarted]);
+
+      return (
+        <span ref={containerRef} className={`inline whitespace-pre-wrap font-mono font-medium ${className}`}>
+          {displayText}
+        </span>
+      );
+    }
+
+    // --- Main App Component ---
+    function App() {
+      return (
+        <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-emerald-500/30">
+          <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-zinc-950/80 backdrop-blur-md">
+            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+              <span className="font-mono text-sm font-bold tracking-tighter">
+                STUDIO<span className="text-emerald-500">_</span>
+              </span>
+              <div className="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
+                <a href="#work" className="hover:text-zinc-50 transition-colors">Work</a>
+                <a href="#services" className="hover:text-zinc-50 transition-colors">Services</a>
+                <a href="#about" className="hover:text-zinc-50 transition-colors">About</a>
+              </div>
+              <button className="text-sm font-medium bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors">
+                Let's Talk
+              </button>
+            </div>
+          </nav>
+
+          <section className="pt-48 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-start min-h-[80vh] justify-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-300 mb-8">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Available for new projects
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] mb-6 max-w-4xl">
+              <span className="block text-zinc-500">I design & build</span>
+              <SpecialText className="text-zinc-50" speed={30} delay={0.2}>
+                digital experiences
+              </SpecialText>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
+              I'm a creative developer and designer crafting beautiful, functional, and memorable websites for forward-thinking brands.
+            </p>
+            
+            <div className="flex flex-wrap gap-4">
+              <button className="flex items-center gap-2 bg-emerald-500 text-zinc-950 px-6 py-3 rounded-full font-medium hover:bg-emerald-400 transition-colors">
+                View My Work <ArrowRight className="w-4 h-4" />
+              </button>
+              <button className="flex items-center gap-2 bg-white/5 text-zinc-50 border border-white/10 px-6 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
+                Contact Me
+              </button>
+            </div>
+          </section>
+
+          <section id="services" className="py-32 px-6 bg-zinc-900/50 border-y border-white/5">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                  <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4">What I do</h2>
+                  <p className="text-zinc-400 max-w-xl">Everything you need to launch a successful digital product, from initial concept to final deployment.</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { icon: Layout, title: "UI/UX Design", desc: "Intuitive, user-centered interfaces that look great and work flawlessly." },
+                  { icon: Code, title: "Web Development", desc: "Fast, accessible, and scalable websites built with modern technologies." },
+                  { icon: Palette, title: "Brand Identity", desc: "Cohesive visual systems that communicate your unique value proposition." },
+                  { icon: MonitorSmartphone, title: "Responsive Design", desc: "Experiences that adapt perfectly to any device or screen size." }
+                ].map((service, i) => (
+                  <div key={i} className="p-6 rounded-2xl bg-zinc-950 border border-white/5 hover:border-white/10 transition-colors group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:bg-emerald-500/10 group-hover:text-emerald-500 transition-colors">
+                      <service.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{service.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="work" className="py-32 px-6 max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4">Selected Work</h2>
+                <p className="text-zinc-400 max-w-xl">A collection of my recent projects and experiments.</p>
+              </div>
+              <button className="text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors flex items-center gap-2">
+                View all projects <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                { title: "E-Commerce Platform", category: "Design & Development", image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&fit=crop&q=80&w=1600&h=1200" },
+                { title: "Fintech Dashboard", category: "UI/UX Design", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600&h=1200" },
+                { title: "Creative Agency", category: "Web Development", image: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=1600&h=1200" },
+                { title: "SaaS Application", category: "Product Design", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600&h=1200" }
+              ].map((project, i) => (
+                <div key={i} className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 bg-zinc-900">
+                    <img src={project.image} alt={project.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100" referrerPolicy="no-referrer" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
+                      <p className="text-zinc-400 text-sm">{project.category}</p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <footer className="border-t border-white/5 bg-zinc-950 pt-20 pb-10 px-6">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+                <div>
+                  <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-6 max-w-md">Let's build something great together.</h2>
+                  <a href="mailto:hello@example.com" className="text-xl text-zinc-400 hover:text-emerald-500 transition-colors">hello@example.com</a>
+                </div>
+                <div className="flex flex-col md:items-end justify-end gap-4">
+                  <div className="flex gap-4">
+                    <a href="#" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><Twitter className="w-5 h-5" /></a>
+                    <a href="#" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><Github className="w-5 h-5" /></a>
+                    <a href="#" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><Linkedin className="w-5 h-5" /></a>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 text-sm text-zinc-500">
+                <p>© {new Date().getFullYear()} Studio. All rights reserved.</p>
+                <div className="flex gap-6 mt-4 md:mt-0">
+                  <a href="#" className="hover:text-zinc-300 transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-zinc-300 transition-colors">Terms of Service</a>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
