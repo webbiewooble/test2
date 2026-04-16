@@ -1,679 +1,953 @@
-<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delhi 76 | Authentic Indian &amp; Nepalese Cuisine</title>
-<meta name="description" content="Delhi 76 Coventry - Authentic Indian and Nepalese cuisine. Order online, book a table, or visit us at Earlsdon.">
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<!-- Tailwind & Icons -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-
+<title>NŪRA | Premium Instant Nutrition</title>
+<meta name="description" content="NŪRA — Clean nutrition crafted for modern life. Fuel your day with premium protein, energy bites, and superfood blends.">
 <style>
-body {
-background-color: #F7F4EB;
-color: #0f0f0f;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#F5EDDF;--bg-alt:#FEF6E8;--text:#000000;--text-light:#555555;--accent:#FFB800;--accent-dark:#E5A500;--accent-light:#FFF3D4;
+--red:#FF3B30;--card-bg:rgba(255,255,255,0.75);--border:rgba(0,0,0,0.08);
+--font:'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+--serif:Georgia,'Times New Roman',serif;
+--radius:16px;--transition:0.4s cubic-bezier(.25,.8,.25,1);
 }
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-width: 8px;
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:99999;opacity:0.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+img,video{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;font-family:var(--font)}
+h1,h2,h3{line-height:1.15;font-weight:700}
+.reveal{opacity:0;transform:translateY(30px) scale(0.98);filter:blur(3px);transition:all 0.9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.25s}.delay-3{transition-delay:.4s}.delay-4{transition-delay:.55s}
+/* SCROLL PROGRESS */
+#scrollProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--accent));z-index:10001;width:0;transition:width 0.1s linear}
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:10000;padding:0;display:flex;flex-direction:column;transition:all var(--transition);background:#000}
+.nav-banner{background:var(--red);text-align:center;padding:8px;font-size:0.72rem;font-weight:600;color:#fff;letter-spacing:0.04em}
+nav.scrolled .nav-banner{display:none}
+.nav-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 48px}
+.nav-left{display:flex;align-items:center;justify-content:flex-start}
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.nav-icon{color:#fff;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color var(--transition)}
+.nav-icon:hover{color:var(--accent)}
+.nav-icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cart-wrapper{position:relative}
+.cart-badge{position:absolute;top:-6px;right:-8px;background:var(--accent);color:#000;font-size:0.65rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.15)}
+.nav-logo{font-size:1.6rem;font-weight:800;letter-spacing:0.05em;color:#fff;transition:color var(--transition);text-align:center}
+nav.scrolled .nav-logo{color:#fff}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.75);transition:color var(--transition)}
+nav.scrolled .nav-links a{color:rgba(255,255,255,0.75)}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{padding:10px 28px;border-radius:50px;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:#000;transition:all var(--transition)}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,184,0,0.35)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:100}
+.burger span{width:24px;height:2px;background:#fff;transition:all 0.3s ease;border-radius:2px}
+nav.scrolled .burger span{background:#fff}
+/* HERO */
+.hero{position:relative;height:100vh;min-height:650px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-video-bg{position:absolute;inset:0;z-index:0}
+.hero-video-bg video{width:100%;height:100%;object-fit:cover;animation:slowZoom 20s ease-in-out infinite alternate}
+@keyframes slowZoom{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+.hero-video-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.4) 40%,rgba(0,0,0,0.7) 100%);z-index:1}
+.hero-fallback{position:absolute;inset:0;background:linear-gradient(135deg,#1a1410 0%,#3a2a18 50%,#1a1410 100%);z-index:0}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:860px;padding:0 24px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:50px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);margin-bottom:24px;opacity:0;animation:fadeUp 1s ease .2s forwards}
+.hero-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-pill span{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+.hero h1{font-size:clamp(2.6rem,6vw,4.8rem);color:#fff;margin-bottom:8px;letter-spacing:-0.03em;opacity:0;animation:fadeUp 1s ease 0.35s forwards}
+.hero-highlight{position:relative;display:inline-block;color:var(--accent-light)}
+.hero-highlight::after{content:'';position:absolute;bottom:2px;left:0;width:100%;height:3px;background:var(--accent);border-radius:2px;animation:expandLine 1s ease 1.2s both}
+@keyframes expandLine{from{width:0}to{width:100%}}
+.hero h1 .line2{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:0.85em;color:rgba(255,255,255,0.7);margin-top:4px}
+.hero p{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,0.7);margin-bottom:36px;font-weight:300;opacity:0;animation:fadeUp 1s ease 0.6s forwards}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s ease 0.85s forwards}
+.btn-primary{padding:16px 40px;border-radius:50px;font-size:0.85rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:#000;color:#fff;transition:all var(--transition);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transform:translateX(-100%);transition:transform 0.6s ease}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-primary:hover{background:#222;transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.25)}
+.btn-primary:active{transform:scale(0.96)}
+.btn-outline{padding:16px 40px;border-radius:50px;font-size:0.85rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.35);transition:all var(--transition)}
+.btn-outline:hover{background:rgba(255,255,255,0.12);border-color:#fff;transform:translateY(-3px)}
+.btn-outline:active{transform:scale(0.96)}
+.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s ease 1.1s forwards}
+.scroll-indicator span{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.5)}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--accent);animation:scrollAnim 2s ease infinite}
+@keyframes scrollAnim{0%{top:-100%}100%{top:100%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+/* TRUST */
+.trust{padding:56px 48px;background:var(--bg-alt);border-bottom:1px solid var(--border)}
+.trust-grid{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;max-width:1000px;margin:0 auto}
+.trust-item{display:flex;align-items:center;gap:14px}
+.trust-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:22px;height:22px;stroke:var(--accent-dark);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.trust-text{font-size:0.82rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+/* PRODUCTS */
+.products{padding:120px 48px;max-width:1200px;margin:0 auto}
+.section-label{font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px;text-align:center}
+.section-title{font-size:clamp(2rem,4vw,3rem);text-align:center;margin-bottom:16px;letter-spacing:-0.03em}
+.section-sub{text-align:center;color:var(--text-light);font-size:0.95rem;margin-bottom:64px;font-weight:300}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.product-card{background:var(--card-bg);border-radius:20px;overflow:hidden;backdrop-filter:blur(10px);border:1px solid var(--border);transition:all 0.5s cubic-bezier(.25,.8,.25,1);position:relative;cursor:pointer;display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(0,0,0,0.12)}
+.best-seller{position:absolute;top:16px;left:16px;background:#000;color:var(--accent);font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border-radius:50px;z-index:2;box-shadow:0 4px 16px rgba(0,0,0,0.25)}
+.limited-tag{font-size:0.72rem;color:#c0392b;font-weight:500;margin-top:4px;display:flex;align-items:center;gap:4px}
+.limited-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#c0392b;animation:pulse 1.5s ease infinite}
+.product-img-wrap{width:100%;aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--bg-alt);flex-shrink:0}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(.25,.8,.25,1);display:block}
+.product-card:hover .product-img-wrap img{transform:scale(1.08) rotate(1deg)}
+.product-info{padding:28px 24px;display:flex;flex-direction:column;flex-grow:1}
+.product-name{font-size:1.15rem;font-weight:700;margin-bottom:6px}
+.product-benefit{font-size:0.85rem;color:var(--text-light);margin-bottom:16px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.product-price{font-size:1.3rem;font-weight:700;color:#000}
+.btn-cart{padding:10px 24px;border-radius:50px;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:#000;color:#fff;transition:all var(--transition)}
+.btn-cart:hover{background:#222;transform:scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,0.2)}
+.btn-cart:active{transform:scale(0.95)}
+/* PRODUCT DETAIL PAGE (GOATLIFE STYLE) */
+.pdp-overlay{position:fixed;inset:0;z-index:9997;background:#fff;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 0.4s ease}
+.pdp-overlay.open{opacity:1;pointer-events:auto}
+.pdp-close{position:fixed;top:24px;right:32px;z-index:9999;width:auto;height:auto;background:none;color:#000;font-size:2.8rem;line-height:1;font-weight:300;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;transition:transform 0.3s ease}
+.pdp-close:hover{transform:rotate(90deg)}
+.pdp-hero{max-width:1200px;margin:80px auto 0;padding:20px 48px 60px;display:grid;grid-template-columns:55% 45%;gap:56px;align-items:start}
+.pdp-gallery{position:sticky;top:40px;display:flex;flex-direction:column;gap:12px}
+.pdp-gallery-main{width:100%;border-radius:24px;aspect-ratio:1/1;object-fit:cover}
+.pdp-gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pdp-gallery-thumbs img{width:100%;border-radius:12px;aspect-ratio:1/1;object-fit:cover;cursor:pointer;opacity:0.6;transition:opacity 0.3s ease}
+.pdp-gallery-thumbs img:hover{opacity:1}
+.pdp-details{padding-top:10px}
+.pdp-title{font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:900;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:12px;line-height:1.2;color:#000}
+.pdp-price{font-size:1.4rem;font-weight:500;margin-bottom:6px;color:#000}
+.pdp-tax{font-size:0.85rem;color:var(--text-light);margin-bottom:32px;font-weight:400}
+.pdp-actions{display:flex;flex-direction:column;gap:12px;margin-bottom:48px}
+.pdp-btn-cart{padding:18px;border-radius:50px;font-size:0.95rem;font-weight:700;letter-spacing:0.04em;background:#000;color:#fff;border:none;cursor:pointer;transition:all 0.3s ease;font-family:var(--font)}
+.pdp-btn-cart:hover{background:#333}
+.pdp-btn-buy{padding:18px;border-radius:50px;font-size:0.95rem;font-weight:700;letter-spacing:0.04em;background:#000;color:#fff;border:none;cursor:pointer;transition:all 0.3s ease;font-family:var(--font)}
+.pdp-btn-buy:hover{background:#333}
+.pdp-accordion{border-top:1px solid #eaeaea;padding:0;margin-bottom:64px}
+.pdp-accordion-item{border-bottom:1px solid #eaeaea}
+.pdp-accordion-btn{width:100%;padding:22px 0;display:flex;justify-content:space-between;align-items:center;background:none;border:none;font-size:0.95rem;font-weight:500;color:#000;cursor:pointer;font-family:var(--font);text-align:left}
+.pdp-accordion-btn-inner{display:flex;align-items:center;gap:14px}
+.pdp-accordion-btn-inner svg{width:22px;height:22px;fill:none;stroke:#000;stroke-width:1.5}
+.pdp-accordion-btn > svg{width:18px;height:18px;transition:transform 0.3s ease;stroke-width:2}
+.pdp-accordion-item.active .pdp-accordion-btn > svg{transform:rotate(180deg)}
+.pdp-accordion-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.pdp-accordion-item.active .pdp-accordion-content{max-height:800px}
+.pdp-accordion-inner{padding:0 0 24px;font-size:0.9rem;color:#444;line-height:1.7}
+/* INGREDIENTS SECTION (GOATLIFE STYLE) */
+.pdp-ingredients{padding:80px 0;background:#fff;border-top:1px solid #eaeaea}
+.pdp-ing-title{text-align:center;font-size:2.4rem;font-weight:900;letter-spacing:0.02em;margin-bottom:48px}
+.pdp-ing-slider{display:flex;gap:24px;overflow-x:auto;padding:0 48px 40px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.pdp-ing-slider::-webkit-scrollbar{display:none}
+.pdp-ing-card{min-width:320px;background:var(--bg);border-radius:24px;padding:24px;text-align:center;scroll-snap-align:center;position:relative}
+.pdp-ing-card h4{font-size:1.8rem;font-weight:900;text-transform:uppercase;line-height:1.1;margin-bottom:16px;color:#8B4513}
+.pdp-ing-card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:20px;margin-bottom:20px}
+.pdp-ing-card p{font-size:0.85rem;font-weight:600;color:#000;line-height:1.4}
+/* GOATED WAY SECTION */
+.pdp-goated{padding:100px 48px;background:var(--bg-alt);text-align:center}
+.pdp-goated h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:64px}
+.pdp-goated-grid{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;gap:20px}
+.pdp-goated-item{display:flex;flex-direction:column;align-items:center;gap:20px;flex:1}
+.pdp-goated-icon{width:140px;height:140px;background:#000;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pdp-goated-icon svg{width:60px;height:60px;stroke:#fff;stroke-width:2;fill:none}
+.pdp-goated-text{font-size:0.9rem;font-weight:700;text-transform:uppercase;max-width:180px}
+@media(max-width:768px){
+.pdp-hero{grid-template-columns:1fr;padding:20px 20px;margin-top:20px;gap:32px}
+.pdp-gallery{position:relative;top:0}
+.pdp-close{top:16px;right:20px;font-size:2.4rem}
+.pdp-ingredients{padding:60px 0}
+.pdp-ing-slider{padding:0 20px 20px}
+.pdp-goated{padding:80px 20px}
+.pdp-goated-grid{flex-wrap:wrap;justify-content:center;gap:40px}
+.pdp-goated-item{min-width:40%}
 }
-::-webkit-scrollbar-track {
-background: #F7F4EB;
+/* STORY */
+.story{padding:120px 48px;background:var(--bg-alt)}
+.story-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.story-text h2{font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:20px;letter-spacing:-0.03em}
+.story-text p{color:var(--text-light);font-size:1.05rem;margin-bottom:12px;line-height:1.8}
+.story-text p strong{color:var(--text);font-weight:600}
+.story-text .stat-row{display:flex;gap:40px;margin:28px 0;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-item .stat-num{font-size:2rem;font-weight:700;color:#000;font-family:var(--serif)}
+.stat-item .stat-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-light)}
+.story-video-wrap{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/9;background:#111;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,0.12)}
+.story-video-wrap video{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.story-video-wrap:hover video{transform:scale(1.04)}
+.play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);transition:background 0.3s ease;z-index:2}
+.play-btn:hover{background:rgba(0,0,0,0.2)}
+.play-btn svg{width:64px;height:64px;fill:rgba(255,255,255,0.9);filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));transition:transform 0.3s ease}
+.play-btn:hover svg{transform:scale(1.12)}
+.play-btn.hidden{display:none}
+/* LIFESTYLE */
+.lifestyle{padding:120px 48px;background:linear-gradient(180deg,var(--bg) 0%,#E8DCC8 100%)}
+.lifestyle-grid{max-width:1400px;margin:0 auto;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:16px}
+.lifestyle-grid::-webkit-scrollbar{display:none}
+.life-card{position:relative;border-radius:16px;overflow:hidden;width:340px;aspect-ratio:4/5;cursor:pointer;flex-shrink:0;scroll-snap-align:start}
+.life-card img, .life-card video{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease}
+.life-card:hover img, .life-card:hover video{transform:scale(1.08)}
+.life-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.1) 50%,transparent 100%);transition:opacity 0.3s ease}
+.life-card:hover::after{opacity:0.8}
+.life-card-content{position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:2;transform:translateY(8px);transition:transform 0.4s ease}
+.life-card:hover .life-card-content{transform:translateY(0)}
+.life-card-content .tag{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-light);font-weight:600;margin-bottom:8px}
+.life-card-content h3{font-size:1.3rem;color:#fff;font-weight:600;margin-bottom:4px}
+.life-card-content p{font-size:0.82rem;color:rgba(255,255,255,0.65);font-weight:300}
+/* INGREDIENTS */
+.ingredients{padding:120px 48px}
+.ingredients-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.ing-col h3{font-size:1.4rem;margin-bottom:28px;display:flex;align-items:center;gap:10px}
+.ing-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.ing-list li{display:flex;align-items:center;gap:14px;font-size:0.95rem;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,0.8);border:1px solid var(--border);transition:all 0.3s ease}
+.ing-list li:hover{transform:translateX(6px);box-shadow:0 4px 16px rgba(0,0,0,0.04)}
+.ing-check{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.in .ing-check{background:#E8F5E9;color:#2E7D32}
+.out .ing-check{background:#FFEBEE;color:#C62828}
+.ing-check svg{width:16px;height:16px}
+/* REVIEWS */
+.reviews{padding:120px 48px;background:var(--bg-alt)}
+.reviews-wrap{max-width:800px;margin:0 auto;text-align:center}
+.rating{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+.stars{color:var(--accent);font-size:1.4rem;letter-spacing:2px}
+.rating-text{font-size:0.85rem;color:var(--text-light)}
+.carousel{position:relative;overflow:hidden;margin-top:40px}
+.carousel-track{display:flex;transition:transform 0.6s cubic-bezier(.25,.8,.25,1)}
+.review-card{min-width:100%;padding:40px;text-align:center}
+.review-quote{font-size:1.2rem;font-style:italic;font-family:var(--serif);color:var(--text);margin-bottom:24px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto}
+.review-author{font-size:0.82rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#000}
+.carousel-dots{display:flex;justify-content:center;gap:10px;margin-top:24px}
+.carousel-dots button{width:10px;height:10px;border-radius:50%;border:none;background:var(--border);transition:all 0.3s ease;padding:0}
+.carousel-dots button.active{background:var(--accent);transform:scale(1.3)}
+/* MEDIA LOGOS */
+.media{padding:56px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.media-label{text-align:center;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:28px}
+.logo-track{display:flex;animation:marquee 25s linear infinite;width:max-content}
+.logo-item{padding:0 48px;font-size:1.1rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(0,0,0,0.12);white-space:nowrap;flex-shrink:0}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* CTA */
+.cta-section{padding:120px 48px;text-align:center;position:relative;overflow:hidden;background:#000}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,184,0,0.12) 0%,transparent 60%);animation:ctaPulse 6s ease infinite alternate}
+@keyframes ctaPulse{0%{opacity:0.5;transform:scale(1)}100%{opacity:1;transform:scale(1.1)}}
+.cta-section h2{font-size:clamp(2rem,4.5vw,3.2rem);color:#fff;margin-bottom:16px;position:relative;z-index:1;letter-spacing:-0.03em}
+.cta-section p{color:rgba(255,255,255,0.55);margin-bottom:40px;font-size:1rem;position:relative;z-index:1}
+.cta-section .btn-primary{position:relative;z-index:1;padding:18px 52px;font-size:0.95rem;background:var(--accent);color:#000}
+.cta-section .btn-primary:hover{background:var(--accent-dark)}
+/* FOOTER */
+footer{padding:80px 48px 40px;background:#000;color:#fff}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;align-items:start}
+.footer-brand{font-size:1.4rem;font-weight:800;letter-spacing:0.05em;margin-bottom:12px}
+.footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.7}
+.footer-newsletter h4{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;color:rgba(255,255,255,0.6)}
+.newsletter-form{display:flex;border-radius:50px;overflow:hidden;border:1px solid rgba(255,255,255,0.12)}
+.newsletter-form input{flex:1;padding:14px 20px;background:transparent;border:none;color:#fff;font-size:0.85rem;font-family:var(--font);outline:none}
+.newsletter-form input::placeholder{color:rgba(255,255,255,0.25)}
+.newsletter-form button{padding:14px 24px;background:var(--accent);color:#fff;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.3s ease}
+.newsletter-form button:hover{background:var(--accent-dark)}
+.footer-social{text-align:right}
+.footer-social h4{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;color:rgba(255,255,255,0.6)}
+.social-icons{display:flex;gap:14px;justify-content:flex-end}
+.social-icons a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease}
+.social-icons a:hover{border-color:var(--accent);background:rgba(200,148,74,0.1);transform:translateY(-3px)}
+.social-icons svg{width:18px;height:18px;fill:rgba(255,255,255,0.6)}
+.social-icons a:hover svg{fill:var(--accent)}
+.footer-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.25)}
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(250,250,248,0.98);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1.15rem;font-weight:600;color:var(--text);letter-spacing:0.06em;text-transform:uppercase}
+.mobile-close{position:absolute;top:24px;right:24px;background:none;font-size:2rem;color:var(--text)}
+/* RESPONSIVE */
+@media(max-width:1024px){
+.product-grid{grid-template-columns:repeat(2,1fr)}
+.story-inner{grid-template-columns:1fr}
+.story-video-wrap{order:-1}
 }
-::-webkit-scrollbar-thumb {
-background: #D01B1B;
-border-radius: 4px;
+@media(max-width:768px){
+.nav-main{padding:12px 24px}
+.nav-links{display:none}
+.nav-cta{display:none}
+.burger{display:flex}
+.trust{padding:36px 24px}
+.trust-grid{gap:20px}
+.products{padding:80px 24px}
+.product-grid{grid-template-columns:1fr}
+.story{padding:80px 24px}
+.story-inner{gap:32px}
+.lifestyle{padding:80px 24px}
+.life-card{width:280px}
+.ingredients{padding:80px 24px}
+.ingredients-grid{grid-template-columns:1fr;gap:40px}
+.reviews{padding:80px 24px}
+.cta-section{padding:80px 24px}
+footer{padding:60px 24px 100px}
+.footer-inner{grid-template-columns:1fr;gap:28px;text-align:center}
+.footer-social{text-align:center}
+.social-icons{justify-content:center}
+.section-title{margin-bottom:10px}
 }
+@media(max-width:480px){
+.hero-btns{flex-direction:column;align-items:stretch}
+.trust-grid{flex-direction:column;gap:16px;align-items:center}
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 </style>
-<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">.font-newsreader { font-family: 'Newsreader', serif !important; }</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">.font-oswald { font-family: 'Oswald', sans-serif !important; }</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }</style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }</style><style id="border-gradient-shared-style">
-[style*="--border-gradient"]::before {
-content: "";
-position: absolute;
-inset: 0;
-padding: 1px;
-border-radius: var(--border-radius-before, inherit);
--webkit-mask: linear-gradient(#fff 0 0) content-box,
-linear-gradient(#fff 0 0);
--webkit-mask-composite: xor;
-mask-composite: exclude;
-background: var(--border-gradient);
-pointer-events: none;
-}</style><!-- aura-ga4-start -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2M6V79H761"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-2M6V79H761');
-</script>
-<!-- aura-ga4-end -->
 </head>
-<body class="antialiased overflow-x-hidden selection:bg-brand-red selection:text-white">
+<body>
+<div id="scrollProgress"></div>
 
-    <!-- Navigation -->
-    <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-  <nav class="flex md:justify-between text-slate-950 bg-[#FFFFFF] w-full max-w-6xl rounded-2xl pt-4 pr-6 pb-4 pl-6 relative shadow-2xl items-center justify-center">
-
-    <!-- Mobile Menu Toggle -->
-<div class="md:hidden absolute top-1/2 left-6 -translate-y-1/2 z-[102]">
-  <button class="hover:text-[#E85424] transition-colors focus:outline-none cursor-pointer block text-slate-950 bg-transparent border-0 shadow-none p-2" aria-label="Open menu" onclick="let o=document.getElementById('mobile-menu-overlay'),s=document.getElementById('mobile-menu-sidebar');if(o&amp;&amp;s){o.classList.remove('hidden','opacity-0','pointer-events-none');o.classList.add('opacity-100','pointer-events-auto');s.classList.remove('hidden','-translate-x-full','opacity-0','pointer-events-none');s.classList.add('translate-x-0','opacity-100','pointer-events-auto');document.body.style.overflow='hidden';}">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-[24px] h-[24px]">
-    <line x1="4" x2="20" y1="12" y2="12" class=""></line>
-    <line x1="4" x2="20" y1="6" y2="6"></line>
-    <line x1="4" x2="20" y1="18" y2="18" class=""></line>
-  </svg>
-</button>
-</div>
-
-
-
-  
-
-
-        <a href="/homepage" class="uppercase inline-flex items-center text-xl font-semibold text-slate-950 tracking-tighter font-display">
-                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f0b48589-b37b-4b3b-80c2-d4fead5bf7b3_800w.png" alt="Rollicious Vietnamese Logo" class="md:h-16 bg-center cursor-pointer w-auto h-12 object-cover">
-        </a>
-
-        <div class="hidden md:flex gap-8 gap-x-8 gap-y-8 items-center">
-                <a href="/story-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">Story</a>
-                <a href="/menu-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">Menu</a>
-                <a href="/find-us-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">find
-                        us</a>
-                <a href="/catering-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">catering</a>
-                <a href="/contact-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">contact</a><a href="/feedback-review-page" class="hover:text-[#E85424] transition-colors uppercase text-sm font-medium text-[#000000]/80 tracking-wider">Reviews</a>
-                
-        </div>
-
-        <div class="hidden md:flex gap-3 gap-x-3 gap-y-3 items-center">
-                <a href="https://order.rollicious.co.nz/" class="uppercase transition-colors hover:bg-[#234220] shadow-orange-900/20 text-xs font-semibold text-white tracking-wide bg-[#234220] rounded-lg pt-2 pr-5 pb-2 pl-5 shadow-lg">
-                        Order Online
-                </a>
-        </div>
+<nav id="mainNav">
+  <div class="nav-banner">Free Shipping Above ₹499 | Use Code NURA10 for 10% Off!</div>
+  <div class="nav-main">
+    <div class="nav-left">
+      <div class="nav-links">
+        <a href="#products">Products</a>
+        <a href="#story">Story</a>
+        <a href="#lifestyle">Lifestyle</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+    <a href="#" class="nav-logo">NŪRA</a>
+    <div class="nav-right">
+      <button class="nav-icon" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <div class="cart-wrapper">
+        <button class="nav-icon" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </button>
+        <span class="cart-badge">0</span>
+      </div>
+    </div>
+  </div>
 </nav>
-</header>
-<!-- Mobile Overlay -->
-<div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-all duration-300" onclick="let s=document.getElementById('mobile-menu-sidebar'),o=document.getElementById('mobile-menu-overlay');if(s){s.classList.remove('translate-x-0','opacity-100','pointer-events-auto');s.classList.add('-translate-x-full','opacity-0','pointer-events-none');setTimeout(function(){s.classList.add('hidden');},300);}if(o){o.classList.remove('opacity-100','pointer-events-auto');o.classList.add('opacity-0','pointer-events-none');setTimeout(function(){o.classList.add('hidden');},300);}document.body.style.overflow='';">
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#products" class="mobile-link">Products</a>
+  <a href="#story" class="mobile-link">Our Story</a>
+  <a href="#lifestyle" class="mobile-link">Lifestyle</a>
+  <a href="#reviews" class="mobile-link">Reviews</a>
+  <a href="#products" class="mobile-link">Shop Now</a>
 </div>
 
-<!-- Mobile Sidebar -->
-<div id="mobile-menu-sidebar" class="hidden md:hidden fixed top-0 left-0 w-[80%] max-w-[320px] h-screen bg-white z-[101] flex flex-col -translate-x-full opacity-0 pointer-events-none transition-all duration-300 overflow-y-auto text-left" onclick="event.stopPropagation()">
-  <!-- Sidebar Header -->
-  <div class="flex items-center justify-between border-b border-gray-200 p-6">
-    <h2 class="text-2xl font-semibold text-slate-900 tracking-tight font-display">Menu</h2>
-    <button class="p-2 -mr-2 text-slate-900 hover:text-[#E85424] transition-colors cursor-pointer" aria-label="Close menu" onclick="event.stopPropagation();let s=document.getElementById('mobile-menu-sidebar'),o=document.getElementById('mobile-menu-overlay');if(s){s.classList.remove('translate-x-0','opacity-100','pointer-events-auto');s.classList.add('-translate-x-full','opacity-0','pointer-events-none');setTimeout(function(){s.classList.add('hidden');},300);}if(o){o.classList.remove('opacity-100','pointer-events-auto');o.classList.add('opacity-0','pointer-events-none');setTimeout(function(){o.classList.add('hidden');},300);}document.body.style.overflow='';">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 6 6 18"></path>
-        <path d="m6 6 12 12"></path>
-      </svg>
-    </button>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-fallback"></div>
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect fill='%231a1410' width='1920' height='1080'/%3E%3C/svg%3E">
+      <source src="https://videos.pexels.com/video-files/3195394/3195394-sd_960_540_25fps.mp4" type="video/mp4">
+    </video>
   </div>
-
-  <!-- Sidebar Navigation -->
-  <div class="flex flex-col py-2 border-b border-gray-200">
-    <a href="/story-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Story</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-
-    <a href="/menu-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Menu</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-
-    <a href="/find-us-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Find Us</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-
-    <a href="/catering-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Catering</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-
-    <a href="/contact-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Contact</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-
-    <a href="/feedback-review-page" class="flex items-center justify-between px-6 py-4 group cursor-pointer">
-      <span class="text-lg font-serif text-slate-900 group-hover:text-[#E85424] transition-colors">Reviews</span>
-      <span class="text-slate-900 group-hover:text-[#E85424] transition-colors">→</span>
-    </a>
-  </div>
-
-  <!-- Sidebar CTA -->
-  <div class="px-6 py-8 mt-auto">
-    <a href="https://order.rollicious.co.nz/" class="flex items-center justify-center w-full uppercase transition-colors hover:bg-[#E85424] text-xs font-semibold text-white tracking-wide bg-[#234220] rounded-lg py-3 shadow-lg cursor-pointer">
-      Order Online
-    </a>
-  </div>
-</div>
-    
-
-    <main class="">
-        <!-- Hero Section -->
-        <section class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-32 pb-20 text-center bg-brand-orange">
-            
-            <!-- Background Texture/Overlay -->
-            <div class="bg-[#E85424] opacity-100 absolute top-0 right-0 bottom-0 left-0"></div>
-
-            <div class="z-10 flex flex-col pr-4 pl-4 relative items-center">
-    <span class="mb-4 font-display text-sm font-semibold tracking-[0.2em] text-white/80 uppercase">
-                    Christchurch • Northern • Vietnamese
-                </span>
-
-    <h1 class="text-[5rem] sm:text-[8rem] md:text-[11rem] leading-[0.85] uppercase font-semibold text-white tracking-tighter font-display drop-shadow-2xl">
-        rollicious</h1>
-
-    <p class="sm:text-base uppercase leading-relaxed text-sm font-medium text-white/90 tracking-wide font-sans max-w-xl mt-6">
-        270 Saint Asaph Street, Christchurch Central City, Christchurch 8011
-    </p>
-
-    <!-- Restored Text -->
-    <h2 class="uppercase text-brand-accent sm:text-5xl text-3xl font-semibold text-[#F3D86D] tracking-tight font-display mt-12 drop-shadow-lg">
-        Authentic Hà Nội style bánh mì
-    </h2>
-
-    <!-- Hero Image Composition -->
-    <div class="relative mt-8 mb-16 w-full max-w-3xl group cursor-pointer">
-        <div class="absolute inset-0 bg-black/20 blur-3xl rounded-full transform scale-75"></div>
-        <!-- New Image -->
-        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/340bbb0a-53b3-4deb-a5e7-923a1fc66482_3840w.png" alt="Authentic Indian Thali Feast" class="z-10 sm:h-[450px] hover:rotate-0 transition-all duration-700 ease-out contrast-110 w-full h-[300px] object-cover border-white/10 border-4 rounded-[2.5rem] mr-auto ml-auto relative shadow-2xl brightness-105 rotate-[-2deg]">
-
-        <!-- Floating Badge -->
-        <div class="absolute -bottom-6 -right-4 sm:right-10 z-20 animate-bounce-slow">
-            <div class="flex flex-col text-brand-black border-brand-orange bg-[#F3D86D] w-24 h-24 border-[#234220] border-4 rounded-full shadow-xl items-center justify-center">
-                <span class="uppercase text-xs font-semibold tracking-tighter">Rated</span>
-                <span class="text-2xl font-semibold font-display">4.9</span>
-                <div class="flex gap-0.5 text-brand-orange">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star h-2 w-2 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star h-2 w-2 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star h-2 w-2 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star h-2 w-2 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star h-2 w-2 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col sm:flex-row gap-4 relative z-20">
-        <a href="/menu-page" class="group inline-flex items-center gap-2 uppercase transition-all hover:bg-[#234220] hover:text-white text-brand-orange text-sm font-semibold tracking-wider font-display bg-white rounded-xl pt-3 pr-8 pb-3 pl-8 shadow-xl">
-            <span class="">View Menu</span>
-            
-        </a>
-        <a href="#book" class="inline-flex items-center gap-2 uppercase transition-all hover:bg-[#234220] hover:border-[#234220] hover:text-white text-sm font-semibold text-black tracking-wider font-display bg-white border-white/30 border-2 rounded-xl pt-3 pr-8 pb-3 pl-8">
-            Find Us
-        </a>
-    </div>
-</div>
-
-            <!-- Wave Separator -->
-            <div class="leading-none w-full absolute bottom-0 left-0">
-  <svg class="block w-full h-[96px] sm:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none" style="color: rgb(247, 244, 235)">
-    <path fill="currentColor" d="M0,128 C450,384 900,256 1440,32 L1440,320 L0,320 Z" class=""></path>
-  </svg>
-</div>
-        </section>
-
-        <!-- Marquee Section -->
-        <div class="overflow-hidden border-black/5 border-b pt-6 pb-6">
-  <div class="flex animate-scroll whitespace-nowrap">
-    <div class="flex pr-4 pl-4 relative gap-x-8 gap-y-8 items-center">
-      <span class="sm:text-6xl uppercase text-4xl font-semibold text-[#234220] tracking-tight font-display">Authentic</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="sm:text-6xl uppercase text-4xl font-semibold text-[#F3D86D] tracking-tight font-display">fresh</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="sm:text-6xl uppercase text-4xl font-semibold text-[#234220] tracking-tight font-display">healthy</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="uppercase sm:text-6xl text-4xl font-semibold text-[#F3D86D] tracking-tight font-display">addictive</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="sm:text-6xl uppercase text-4xl font-semibold text-[#234220] tracking-tight font-display">baked fresh daily at 5am</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black">authentic</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">fresh</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black">healthy</span>
-      <span class="text-2xl text-brand-orange">●</span>
-      <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">addictive</span>
-      <span class="text-2xl text-brand-orange">●</span>
-
-      <div class="flex items-center gap-x-8 absolute left-full top-0 h-full pl-4 pr-4" aria-hidden="true">
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">baked fresh daily at 5am</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="sm:text-6xl uppercase text-4xl font-semibold text-black tracking-tight font-display">authentic</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">fresh</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black">healthy</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">addictive</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black">baked fresh daily at 5am</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">authentic</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black">fresh</span>
-        <span class="text-2xl text-brand-orange">●</span>
-        <span class="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tight text-black/10">healthy</span>
-        <span class="text-2xl text-brand-orange">●</span>
-      </div>
+  <div class="hero-content">
+    <div class="hero-pill"><div class="dot"></div><span>New Collection Available</span></div>
+    <h1>No Time for <span class="hero-highlight">Breakfast</span>?<span class="line2">Nutrition in 10 Seconds.</span></h1>
+    <p>Plant-powered, whole-food nutrition designed for people who refuse to slow down.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Shop Now</a>
+      <a href="#products" class="btn-outline">Explore Products</a>
     </div>
   </div>
-</div>
+  <div class="scroll-indicator"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
 
-        <!-- Bento Grid / About -->
-        
-
-        <!-- Menu Teaser Section -->
-        <section class="sm:px-8 bg-[#f7f4eb] border-black/5 border-t pt-24 pr-4 pb-24 pl-4" id="menu">
-  <div class="max-w-7xl mr-auto ml-auto">
-    <div class="flex flex-col md:flex-row mb-16 gap-x-3 gap-y-3 items-end justify-between">
-  <div class="">
-    <span class="uppercase text-brand-orange text-xs font-semibold tracking-[0.2em] font-display">The Menu</span>
-    <h2 class="sm:text-7xl uppercase leading-none text-5xl font-semibold text-[#E85424] tracking-tighter font-display mt-2">
-      Our Most Loved<br class="">bánh mì</h2>
-  </div>
-  <div class="md:max-w-xs md:text-left text-right">
-    <p class="text-sm text-black">From our signature grilled pork bánh mì to our newest beef cheek bánh mì, every
-      roll is built on bread baked fresh daily at 5am.</p>
-    
-  </div>
-</div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-      <!-- Item 1 -->
-      <div class="group">
-        <div class="mb-4 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3]">
-          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6af9d9c1-eb48-45d5-a2a9-b9b74be3ad81_3840w.jpg" class="transition-transform duration-500 group-hover:scale-105 bg-stone-950 w-full h-full object-cover" alt="Chicken Curry">
-        </div>
-        <div class="flex border-dashed border-black/20 border-b pb-2 items-baseline justify-between">
-          <h3 class="uppercase transition-colors group-hover:text-brand-orange text-xl font-semibold text-[#E85424] font-display">
-            Grilled pork bánh mì</h3>
-          <span class="text-sm font-semibold font-mono">$12.50</span>
-        </div>
-        <p class="line-clamp-2 text-xs text-black mt-2">Our customer's favourite with freshly baked crispy bread,
-          pâté,
-          mayo,
-          pickled carrots, daikon, and coriander.</p>
-      </div>
-
-      <!-- Item 2 -->
-      <div class="group">
-        <div class="mb-4 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3]">
-          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/64824e9f-03bd-4d7c-b8ad-65660489d00f_3840w.jpg" class="transition-transform duration-500 group-hover:scale-105 w-full h-full object-cover" alt="Momos">
-        </div>
-        <div class="flex justify-between items-baseline border-b border-dashed border-black/20 pb-2">
-          <h3 class="uppercase transition-colors group-hover:text-brand-orange text-xl font-semibold text-[#E85424] font-display">
-            Beef Cheek bánh mì</h3>
-          <span class="text-sm font-semibold font-mono">$12.50</span>
-        </div>
-        <p class="line-clamp-2 text-xs text-black mt-2">Slow-cooked until rich, tender, and full of flavour. Finished
-          in our crispy fresh bread, housemade mayo and pâté, pickled carrots, daikon and coriander.</p>
-      </div>
-
-      <!-- Item 3 -->
-      <div class="group">
-        <div class="mb-4 overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3]">
-          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/9bacda86-0836-4ba6-8c8f-9ffe19d7c612_3840w.jpg" class="transition-transform duration-500 group-hover:scale-105 w-full h-full object-cover" alt="Biryani">
-        </div>
-        <div class="flex justify-between items-baseline border-b border-dashed border-black/20 pb-2">
-          <h3 class="uppercase transition-colors group-hover:text-brand-orange text-xl font-semibold text-[#E85424] font-display">
-            tofu bánh mì</h3>
-          <span class="text-sm font-semibold font-mono">$12.50</span>
-        </div>
-        <p class="line-clamp-2 text-xs text-black mt-2">A fresh vegan favourite with house-made peanut sauce, pickled
-          carrot, daikon, and coriander.
-        </p>
-      </div>
-    </div>
-
-    <div class="text-center mt-16 gap-x-3 gap-y-3">
-      <a href="/menu-page" class="inline-flex items-center gap-3 uppercase transition-all hover:bg-brand-orange text-sm font-semibold text-white tracking-widest font-display bg-[#E85424] rounded-full pt-4 pr-8 pb-4 pl-8">
-  <span class="cursor-pointer" onclick="window.location.href='/menu-page'" role="button">View Full Menu</span>
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" strokewidth="1.5" aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-</a>
-    </div>
+<!-- TRUST -->
+<section class="trust reveal">
+  <div class="trust-grid">
+    <div class="trust-item delay-1"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div><span class="trust-text">25g Protein</span></div>
+    <div class="trust-item delay-2"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div><span class="trust-text">No Added Sugar</span></div>
+    <div class="trust-item delay-3"><div class="trust-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="trust-text">Ready in 10s</span></div>
+    <div class="trust-item delay-4"><div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22C6.5 18 2 14 2 8.5C2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3C19.6 3 22 5.4 22 8.5C22 14 17.5 18 12 22Z"/></svg></div><span class="trust-text">100% Natural</span></div>
   </div>
 </section>
 
-        <!-- Hours & Booking -->
-        
-
-        <!-- Reviews Section -->
-        <section class="overflow-hidden bg-[#f7f4eb] pt-24 pr-4 pb-24 pl-4" id="reviews">
-            <div class="text-center mb-16">
-                <div class="inline-flex text-[#ffffff] bg-[#234220] border-black/10 border rounded-full mb-6 pt-1.5 pr-4 pb-1.5 pl-4 gap-x-2 gap-y-2 items-center">
-                    <span class="flex gap-1 text-brand-orange">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star w-3 h-3 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star w-3 h-3 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star w-3 h-3 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star w-3 h-3 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star w-3 h-3 fill-current"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                    </span>
-                    <span class="text-[10px] uppercase font-semibold tracking-wider">Based on 126 Reviews</span>
-                </div>
-                <h2 class="sm:text-6xl uppercase text-brand-black text-4xl font-semibold font-display">Loved by Christchurch locals</h2>
-            </div>
-
-            <div class="mx-auto max-w-7xl">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Review 1 -->
-                    <div class="bg-[#F3D86D] border-black/5 border rounded-2xl pt-8 pr-8 pb-8 pl-8 shadow-sm">
-  <div class="flex items-center gap-4 mb-4">
-    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500 text-xs">TH
-    </div>
-    <div class="">
-      <h4 class="text-sm font-semibold">Tami H</h4>
-      <p class="text-[10px] uppercase text-[#000000]">January 2026</p>
-    </div>
-  </div>
-  <div class="flex gap-0.5 mb-3 text-brand-orange">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-  </div>
-  <p class="leading-relaxed text-sm text-[#000000]">"Hands down the BEST Banh Mi &amp; Pho!! One bite of the Banh Mi
-  baguette, one sip of the lime-topped pho and we're right
-  back at our favourite spot in Vietnam."</p>
-</div>
-
-                    <!-- Review 2 -->
-                    <div class="bg-[#F3D86D] border-black/5 border rounded-2xl pt-8 pr-8 pb-8 pl-8 shadow-sm">
-  <div class="flex gap-4 mb-4 gap-x-4 gap-y-4 items-center">
-    <div class="flex text-xs font-bold text-gray-500 bg-gray-200 w-10 h-10 rounded-full items-center justify-center">LC
-</div>
-    <div class="">
-      <h4 class="text-sm font-semibold">Lai Teng C.</h4>
-      <p class="text-[10px] uppercase text-[#000000]">February 2026</p>
-    </div>
-  </div>
-  <div class="flex gap-0.5 text-brand-orange mb-3 gap-x-0.5 gap-y-0.5">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="width: 12px; height: 12px; color: rgb(232, 84, 36);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="width: 12px; height: 12px; color: rgb(232, 84, 36);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="width: 12px; height: 12px; color: rgb(232, 84, 36);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="width: 12px; height: 12px; color: rgb(232, 84, 36);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="width: 12px; height: 12px; color: rgb(232, 84, 36);"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-  </div>
-  <p class="leading-relaxed text-sm text-[#000000]">"Beef Broth is flavourful and I like that they are Very generous with
-  beef slices and garnishes! I like how the cold fresh roll doesn’t come in set so you could mix and match according
-  to
-  own protein preferences. Would definitely return!"</p>
-</div>
-
-                     <!-- Review 3 -->
-                    <div class="bg-[#F3D86D] border-black/5 border rounded-2xl px-8 py-8 shadow-sm">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500 text-xs">PC
-</div>
-                            <div class="">
-                                <h4 class="font-semibold text-sm">Patrick C</h4>
-                                <p class="text-[10px] uppercase text-[#000000]">October 2025</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 mb-3 text-brand-orange">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="star" strokewidth="1.5" aria-hidden="true" class="lucide lucide-star fill-current w-[12px] h-[12px]" data-icon-replaced="true" style="color: rgb(232, 84, 36); width: 12px; height: 12px"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg>
-                        </div>
-                        <p class="leading-relaxed text-sm text-[#000000]">"Absolutely delicious! Rollicious serves up some of the best Banh Mi
-  I've ever had with great flavour and fresh
-  ingredients. Their iced coffee is hands down the best in town. The staff are friendly and welcoming. Highly recommend
-  for anyone craving authentic Vietnamese food."</p>
-                    </div>
-                </div>
-            </div>
-        </section><section class="overflow-hidden bg-[#f7f4eb] pt-24 pr-4 pb-24 pl-4 relative">
-    <div class="max-w-4xl mx-auto w-full relative z-10">
-        <div class="sm:p-12 md:p-16 overflow-hidden flex flex-col text-center bg-[#234220] border-[#234220] border-4 rounded-[2.5rem] pt-12 pr-8 pb-12 pl-8 relative shadow-2xl items-center">
-    <div class="z-10 flex flex-col w-full relative items-center">
-        <!-- Tag -->
-        <div class="inline-flex items-center gap-2 bg-[#E85424] rounded-full px-5 py-2.5 mb-8 shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 text-white">
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </svg>
-            <span class="uppercase text-xs font-semibold text-white tracking-[0.2em] font-display">Join Our Community of Die-hard bánh mì fans</span>
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-label reveal">Our Collection</div>
+  <h2 class="section-title reveal">Nutrition, Perfected</h2>
+  <p class="section-sub reveal">Three essentials. Zero compromises. Built for your body and your schedule.</p>
+  <div class="product-grid">
+    <div class="product-card reveal delay-1">
+      <div class="product-img-wrap">
+        <img src="https://images.pexels.com/photos/1346215/pexels-photo-1346215.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Protein Power Blend">
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Protein Power Blend</h3>
+        <p class="product-benefit">25g clean protein per serving. Zero fillers, zero bloat.</p>
+        <div class="product-bottom">
+          <span class="product-price">₹1,299</span>
+          <button class="btn-cart">Add to Cart</button>
         </div>
-
-        <!-- Title -->
-        <h2 class="sm:text-6xl md:text-7xl uppercase leading-none text-5xl font-semibold text-[#F3D86D] tracking-tighter font-display mb-6 drop-shadow-lg">bánh mì fans</h2>
-
-        <!-- Description -->
-        <p class="sm:text-base leading-relaxed text-sm text-white/90 font-sans max-w-xl mb-10">
-            Subscribe to get 10% off your first order, plus weekly recipes, new menu updates and exclusive early access
-            to events.
-        </p>
-
-        <!-- Form -->
-        <form class="flex flex-col sm:flex-row w-full max-w-xl gap-3 relative z-10 justify-center">
-            <input type="email" placeholder="Enter your email" required="" class="flex-1 bg-[#F7F4EB] border-2 border-transparent rounded-full px-6 py-4 text-sm font-medium text-brand-black placeholder:text-gray-500 focus:outline-none focus:border-[#F3D86D] focus:ring-4 focus:ring-[#F3D86D]/20 transition-all shadow-inner">
-            <button type="button" class="inline-flex items-center justify-center gap-2 bg-[#E85424] hover:bg-[#F3D86D] hover:text-[#234220] text-white font-display font-semibold uppercase tracking-widest text-sm rounded-full px-8 py-4 transition-all duration-300 shadow-lg whitespace-nowrap">
-                Subscribe
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-            </button>
-        </form>
-
-        <!-- Disclaimer -->
-        <p class="text-xs text-white/50 mt-6 uppercase tracking-[0.15em] font-semibold font-display">
-            By subscribing, you agree to receive marketing emails. Unsubscribe anytime.
-        </p>
-    </div>
-</div>
-    </div>
-</section>
-
-        <!-- FAQ Section -->
-        <section class="sm:px-8 bg-[#f7f4eb] pt-24 pr-4 pb-24 pl-4" id="faq">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="uppercase text-4xl font-semibold tracking-tight font-display text-center mb-12">Frequently Asked
-      Questions</h2>
-
-    <div class="space-y-4">
-      <details class="group [&amp;_summary::-webkit-details-marker]:hidden text-[#ffffff] bg-[#E85424] border-black/10 border rounded-2xl pt-6 pr-6 pb-6 pl-6">
-        <summary class="flex cursor-pointer text-gray-900 gap-x-1.5 gap-y-1.5 items-center justify-between">
-          <h3 class="uppercase text-lg font-semibold text-[#ffffff] font-display bg-[#fffff]">What makes your bánh mì
-            different?
-          </h3>
-          <span class="shrink-0 text-white w-5 h-5 relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity text-white" style="color: #FFFFFF"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-minus group-open:opacity-100 transition-opacity opacity-0 absolute top-0 right-0 bottom-0 left-0 w-[24px] h-[24px]" data-icon-replaced="true" style="width: 24px; height: 24px; color: rgb(255, 255, 255);"><path d="M5 12h14"></path></svg>
-                            </span>
-        </summary>
-        <p class="mt-4 text-sm leading-relaxed text-white">
-          We focus on authentic Northern Vietnamese flavours, which are lighter, more balanced, and less sweet.
-          Everything is
-          built around fresh ingredients and bread baked daily at 5am!
-        </p>
-      </details><details class="group [&amp;_summary::-webkit-details-marker]:hidden text-[#ffffff] bg-[#E85424] border-black/10 border rounded-2xl pt-6 pr-6 pb-6 pl-6">
-  <summary class="flex cursor-pointer gap-1.5 text-gray-900 gap-x-1.5 gap-y-1.5 items-center justify-between">
-    <h3 class="uppercase text-lg font-semibold text-[#ffffff] font-display bg-[#fffff]">Is your bread really baked fresh
-      every
-      day?
-    </h3>
-    <span class="shrink-0 text-white w-5 h-5 relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity text-white" style="color: #FFFFFF"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-minus group-open:opacity-100 transition-opacity opacity-0 absolute top-0 right-0 bottom-0 left-0 w-[24px] h-[24px]" data-icon-replaced="true" style="width: 24px; height: 24px; color: rgb(255, 255, 255);"><path d="M5 12h14"></path></svg>
-                            </span>
-  </summary>
-  <p class="mt-4 text-sm leading-relaxed text-white">
-    Yes! Our bread is baked fresh every morning at 5am. That’s what gives our bánh mì its crispiness on the
-    outside and
-    the fluffiness on the inside.
-  </p>
-</details><details class="group [&amp;_summary::-webkit-details-marker]:hidden text-[#ffffff] bg-[#E85424] border-black/10 border rounded-2xl pt-6 pr-6 pb-6 pl-6">
-  <summary class="flex cursor-pointer gap-1.5 text-gray-900 gap-x-1.5 gap-y-1.5 items-center justify-between">
-    <h3 class="uppercase text-lg font-semibold text-[#ffffff] font-display bg-[#fffff]">Do you have vegetarian or vegan
-      options?
-    </h3>
-    <span class="shrink-0 text-white w-5 h-5 relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity text-white" style="color: #FFFFFF"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-minus group-open:opacity-100 transition-opacity opacity-0 absolute top-0 right-0 bottom-0 left-0 w-[24px] h-[24px]" data-icon-replaced="true" style="width: 24px; height: 24px; color: rgb(255, 255, 255);"><path d="M5 12h14"></path></svg>
-                            </span>
-  </summary>
-  <p class="mt-4 text-sm leading-relaxed text-white">
-        Yes, we offer vegetarian options like tofu bánh mì. Just let us know your preference when ordering.
-  </p>
-</details><details class="group [&amp;_summary::-webkit-details-marker]:hidden text-[#ffffff] bg-[#E85424] border-black/10 border rounded-2xl pt-6 pr-6 pb-6 pl-6">
-  <summary class="flex cursor-pointer gap-1.5 text-gray-900 gap-x-1.5 gap-y-1.5 items-center justify-between">
-    <h3 class="uppercase text-lg font-semibold text-[#ffffff] font-display bg-[#fffff]">Can I customise my order?
-    </h3>
-    <span class="shrink-0 text-white w-5 h-5 relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity text-white" style="color: #FFFFFF"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-minus group-open:opacity-100 transition-opacity opacity-0 absolute top-0 right-0 bottom-0 left-0 w-[24px] h-[24px]" data-icon-replaced="true" style="width: 24px; height: 24px; color: rgb(255, 255, 255);"><path d="M5 12h14"></path></svg>
-                            </span>
-  </summary>
-  <p class="mt-4 text-sm leading-relaxed text-white">
-    Of course. You can adjust things like chilli, coriander, or sauces to suit your taste. Just tell us when you order.
-  </p>
-</details><details class="group [&amp;_summary::-webkit-details-marker]:hidden text-[#ffffff] bg-[#E85424] border-black/10 border rounded-2xl pt-6 pr-6 pb-6 pl-6">
-  <summary class="flex cursor-pointer gap-1.5 text-gray-900 gap-x-1.5 gap-y-1.5 items-center justify-between">
-    <h3 class="uppercase text-lg font-semibold text-[#ffffff] font-display bg-[#fffff]">Is your bánh mì greasy and
-      heavy?
-    </h3>
-    <span class="shrink-0 text-white w-5 h-5 relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-plus absolute inset-0 opacity-100 group-open:opacity-0 transition-opacity text-white" style="color: #FFFFFF"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" strokewidth="1.5" aria-hidden="true" class="lucide lucide-minus group-open:opacity-100 transition-opacity opacity-0 absolute top-0 right-0 bottom-0 left-0 w-[24px] h-[24px]" data-icon-replaced="true" style="width: 24px; height: 24px; color: rgb(255, 255, 255);"><path d="M5 12h14"></path></svg>
-                            </span>
-  </summary>
-  <p class="mt-4 text-sm leading-relaxed text-white">
-We focus on fresh ingredients and balanced flavours. Our bánh mì is designed to feel light and satisfying, not overly
-heavy or greasy.
-  </p>
-</details>
-
-      
-
-      
-    </div>
-  </div>
-</section><section class="sm:px-8 text-white bg-[#234220] pt-20 pr-4 pb-20 pl-4" id="book">
-  <div class="grid lg:grid-cols-2 gap-12 max-w-7xl mr-auto ml-auto gap-x-12 gap-y-12 items-center">
-    <div class="">
-      <span class="font-display text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">Visit Us</span>
-      <h2 class="sm:text-6xl uppercase text-4xl font-semibold tracking-tight font-display mt-2">Opening Hours</h2>
-      <p class="text-white/60 max-w-md mt-4">270 Saint Asaph Street, Christchurch Central City, Christchurch 8011</p>
-
-      <div class="mt-10 space-y-6">
-        <div class="flex border-white/10 border-b pb-4 items-center justify-between">
-          <span class="uppercase text-lg tracking-wide font-display">Mon - Fri</span>
-          <span class="text-brand-orange text-sm font-mono">10AM - 3PM</span>
-        </div>
-        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-          <span class="uppercase text-lg tracking-wide font-display">SAT - SUN</span>
-          <span class="text-brand-orange text-sm font-mono">Closed</span>
-        </div>
-
-
       </div>
     </div>
-
-    <div class="relative rounded-[2rem] p-10 overflow-hidden text-center bg-brand-orange">
-      <div class="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-
-      <h3 class="relative z-10 font-display text-3xl font-semibold uppercase mb-6">Food truck hours</h3>
-      <p class="relative z-10 text-sm text-white/90 mb-8 px-4">We have multiple food truck locations, weekly events,
-        markets
-        and festivals we serve at!</p>
-
-      <div class="text-center mt-16 gap-x-3 gap-y-3">
-        <a href="/find-us-page" class="inline-flex items-center gap-3 uppercase transition-all hover:bg-brand-orange text-sm font-semibold text-white tracking-widest font-display bg-[#E85424] rounded-full pt-4 pr-8 pb-4 pl-8">
-          <span class="">View location &amp; hours</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" strokewidth="1.5" aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-        </a>
+    <div class="product-card reveal delay-2">
+      <span class="best-seller">★ Best Seller</span>
+      <div class="product-img-wrap">
+        <img src="https://images.pexels.com/photos/4099238/pexels-photo-4099238.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Golden Energy Bites">
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Golden Energy Bites</h3>
+        <p class="product-benefit">Sustained energy from whole foods. No crash, ever.</p>
+        <div class="limited-tag">Limited Stock — Order Soon</div>
+        <div class="product-bottom" style="margin-top:12px">
+          <span class="product-price">₹899</span>
+          <button class="btn-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal delay-3">
+      <div class="product-img-wrap">
+        <img src="https://images.pexels.com/photos/5946081/pexels-photo-5946081.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Green Vitality Mix">
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Green Vitality Mix</h3>
+        <p class="product-benefit">12 supergreens in every scoop. Pure, clean energy.</p>
+        <div class="product-bottom">
+          <span class="product-price">₹1,099</span>
+          <button class="btn-cart">Add to Cart</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-        <!-- App Banner -->
-        
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-white bg-[#f7f4eb] border-white/10 border-t pt-20 pb-10">
-  <div class="sm:px-8 max-w-7xl mr-auto ml-auto pr-4 pl-4">
-    <div class="flex flex-col md:flex-row mb-20 gap-x-12 gap-y-12 justify-between items-center md:items-start text-center md:text-left">
-      <div class="max-w-sm">
-        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6aaace39-7e06-49d7-b37b-924c6e273acf_320w.png" alt="Rollicious Vietnamese Logo" class="md:h-16 bg-center text-center w-auto object-cover pt-4 pb-4 mx-auto md:mx-0">
-        <p class="leading-relaxed text-sm text-[#E85424]">Rollicious is a Christchurch-based Vietnamese brand
-          specialising in
-          authentic Northern-style bánh mì, with light, balanced flavours and bread baked fresh daily at 5am for that
-          perfect crispy outside and fluffy inside.</p>
-        <div class="flex gap-4 mt-6 gap-x-4 gap-y-4 justify-center md:justify-start" :nth-of-type(1)="" &gt;="" div:nth-of-type(1)="" div:nth-of-type(1)"="">
-  <a href="https://www.instagram.com/rollicious_vietnamese/" class="transition-colors hover:text-brand-orange text-[#000000]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="instagram" strokewidth="1.5" aria-hidden="true" class="lucide lucide-instagram w-[20px] h-[20px]" data-icon-replaced="true" style="width: 20px; height: 20px; color: rgb(232, 84, 36);">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" class=""></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" class=""></path>
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-    </svg></a>
-  <a href="https://www.facebook.com/RolliciousVietnamese/" class="transition-colors hover:text-brand-orange"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="facebook" strokewidth="1.5" aria-hidden="true" class="lucide lucide-facebook w-[20px] h-[20px]" data-icon-replaced="true" style="width: 20px; height: 20px; color: rgb(232, 84, 36);">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" class=""></path>
-    </svg></a>
-  <a href="#" class="transition-colors hover:text-brand-orange"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="twitter" strokewidth="1.5" aria-hidden="true" class="lucide lucide-twitter w-[20px] h-[20px]" data-icon-replaced="true" style="width: 20px; height: 20px; color: rgb(232, 84, 36);">
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" class="">
-      </path>
-    </svg></a>
-</div>
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-inner">
+    <div class="story-text reveal">
+      <div class="section-label" style="text-align:left">Our Story</div>
+      <h2>No Time? No Problem.</h2>
+      <p><strong>We get it.</strong> You skip breakfast, grab junk at noon, and crash by 3pm. Sound familiar?</p>
+      <p>We built NŪRA for exactly this — <strong>real nutrition in seconds</strong>, not hours. Every product is crafted with whole-food ingredients, backed by science, and tested by athletes, parents, and creators who refuse to compromise.</p>
+      <div class="stat-row">
+        <div class="stat-item"><div class="stat-num">50K+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat-item"><div class="stat-num">4.8★</div><div class="stat-label">Average Rating</div></div>
+        <div class="stat-item"><div class="stat-num">10s</div><div class="stat-label">Prep Time</div></div>
       </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-12 gap-y-12">
-  <div class="flex flex-col items-center md:items-start text-center md:text-left">
-    <h4 class="uppercase text-brand-orange text-lg font-semibold text-[#E85424] tracking-wider font-display mb-4">
-      information</h4>
-    <ul class="text-sm text-white/60 space-y-3 flex flex-col items-center md:items-start">
-      <li class=""><a href="/story-page" class="hover:text-[#E85424] transition-colors text-[#E85424]">Our
-          Story</a></li>
-      <li class=""><a href="/menu-page" class="hover:text-[#E85424] transition-colors text-[#E85424]">Our Menu</a>
-      </li>
-      <li class=""><a href="/find-us-page" class="hover:text-[#E85424] transition-colors text-[#E85424]">Find Us</a>
-      </li>
-      <li class="">
-        <a href="/catering-page" class="hover:text-[#E85424] transition-colors text-[#E85424]">
-          Catering
-        </a>
-      </li>
-
-    </ul>
-  </div>
-
-
-
-  <div class="flex flex-col items-center md:items-start text-center md:text-left">
-    <h4 class="uppercase text-brand-orange text-lg font-semibold text-[#E85424] tracking-wider font-display mb-4">
-      Get in
-      touch</h4>
-    <ul class="space-y-3 text-sm text-white/60 flex flex-col items-center md:items-start">
-      <li class="transition-colors select-text text-[#E85424]">
-        020 434 8989
-      </li>
-      <li class="transition-colors select-text text-[#E85424]">
-        hello@rollicious.co.nz
-      </li>
-    </ul>
-  </div>
-</div>
+      <a href="#products" class="btn-primary">Discover More</a>
     </div>
-
-    <div class="flex flex-col sm:flex-row uppercase text-xs text-[#E85424] tracking-widest border-white/10 border-t pt-8 gap-x-4 gap-y-4 items-center justify-between">
-      <p class="">© Rollicious, 2026</p>
-      <div class="flex gap-6">
-        <a href="/privacy-page" class="hover:text-[#234220]">Privacy Policy</a>
-        <a href="/terms-page" class="hover:text-[#234220]">Terms &amp; Conditions</a>
+    <div class="story-video-wrap reveal delay-2" id="storyVideo">
+      <video muted loop playsinline loading="lazy" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect fill='%23222' width='800' height='450'/%3E%3C/svg%3E">
+        <source src="https://videos.pexels.com/video-files/857251/857251-sd_960_540_25fps.mp4" type="video/mp4">
+      </video>
+      <div class="play-btn" id="playBtn">
+        <svg viewBox="0 0 64 64"><polygon points="24,16 50,32 24,48"/></svg>
       </div>
     </div>
   </div>
+</section>
+
+<!-- LIFESTYLE -->
+<section class="lifestyle" id="lifestyle">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-label reveal" style="text-align:center">Built for Every Moment</div>
+    <h2 class="section-title reveal">Your Life. Your Fuel.</h2>
+    <p class="section-sub reveal">From the gym to the boardroom to 30,000 feet — NŪRA goes where you go.</p>
+  </div>
+  <div class="lifestyle-grid">
+    <div class="life-card reveal delay-1">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/4752243/4752243-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Pre-Workout</div>
+        <h3>At the Gym</h3>
+        <p>Fuel your reps with clean protein. No bloat, no crash.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-2">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/4491931/4491931-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Quick Meal</div>
+        <h3>At the Office</h3>
+        <p>Skip the cafeteria. 10 seconds to a complete meal.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-3">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/2871929/2871929-uhd_2160_3840_30fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">On-the-Go</div>
+        <h3>On the Road</h3>
+        <p>Travel-friendly nutrition. No cooler needed.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-1">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/5198159/5198159-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Breakfast</div>
+        <h3>Morning Rush</h3>
+        <p>A full nutritional profile before you even leave the door.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-2">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/4434242/4434242-uhd_2160_3840_24fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Trail Fuel</div>
+        <h3>The Great Outdoors</h3>
+        <p>Lightweight fuel that packs a massive calorie-to-weight punch.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-3">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/4114797/4114797-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Focus</div>
+        <h3>Late Nights</h3>
+        <p>MCTs and clean energy to keep your brain sharp without caffeine jitters.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-1">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/2792370/2792370-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Traffic Snack</div>
+        <h3>Daily Commute</h3>
+        <p>A perfectly balanced bite to keep road rage at bay.</p>
+      </div>
+    </div>
+    <div class="life-card reveal delay-2">
+      <video autoplay muted loop playsinline src="https://videos.pexels.com/video-files/2785531/2785531-uhd_2160_3840_25fps.mp4"></video>
+      <div class="life-card-content">
+        <div class="tag">Recovery</div>
+        <h3>Post-Match</h3>
+        <p>Instant amino-acids directly after the final whistle blows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredients" id="ingredients">
+  <div class="section-label reveal" style="text-align:center">Transparency First</div>
+  <h2 class="section-title reveal">What's Inside Matters</h2>
+  <p class="section-sub reveal">We obsess over what goes in — and what stays out.</p>
+  <div class="ingredients-grid">
+    <div class="ing-col in reveal delay-1">
+      <h3><span style="color:#2E7D32">✓</span> What Goes In</h3>
+      <ul class="ing-list">
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Plant-Based Whey Protein</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Organic Supergreens</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Cold-Pressed Coconut MCTs</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Natural Adaptogens</li>
+      </ul>
+    </div>
+    <div class="ing-col out reveal delay-2">
+      <h3><span style="color:#C62828">✕</span> What Stays Out</h3>
+      <ul class="ing-list">
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Artificial Sweeteners</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Refined Sugars</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Preservatives & Fillers</li>
+        <li><span class="ing-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Soy & Gluten</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-wrap reveal">
+    <div class="section-label">What People Say</div>
+    <h2 class="section-title">Loved by Thousands</h2>
+    <div class="rating"><span class="stars">★★★★★</span><span class="rating-text">4.8 / 5 — 2,400+ reviews</span></div>
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="review-card"><p class="review-quote">"NŪRA completely changed my mornings. I blend, grab, and go — and I've never felt more energized. The Protein Blend is unreal."</p><span class="review-author">— Priya M., Fitness Coach</span></div>
+        <div class="review-card"><p class="review-quote">"As a mom of two, I barely have time to eat. The Golden Energy Bites are my secret weapon. Delicious, clean, and keeps me going."</p><span class="review-author">— Ananya R., Entrepreneur</span></div>
+        <div class="review-card"><p class="review-quote">"I've tried every green powder. NŪRA's Green Vitality Mix is the only one that actually tastes good and works. Game changer."</p><span class="review-author">— Rahul K., Engineer</span></div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"><button class="active" data-index="0"></button><button data-index="1"></button><button data-index="2"></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section class="media">
+  <div class="media-label">As Featured In</div>
+  <div class="logo-track">
+    <span class="logo-item">HEALTH DIGEST</span><span class="logo-item">WELLNESS MAG</span><span class="logo-item">FIT LIVING</span><span class="logo-item">CLEAN EATS</span><span class="logo-item">NUTRITION TODAY</span><span class="logo-item">THE DAILY WELL</span>
+    <span class="logo-item">HEALTH DIGEST</span><span class="logo-item">WELLNESS MAG</span><span class="logo-item">FIT LIVING</span><span class="logo-item">CLEAN EATS</span><span class="logo-item">NUTRITION TODAY</span><span class="logo-item">THE DAILY WELL</span>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="reveal">Start Your Healthy Routine Today</h2>
+  <p class="reveal">Join 50,000+ customers who've made the switch to cleaner nutrition.</p>
+  <a href="#products" class="btn-primary reveal">Order Now</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">NŪRA</div><p class="footer-desc">Clean nutrition, crafted for modern life. Fuel your body with ingredients you can trust.</p></div>
+    <div class="footer-newsletter"><h4>Stay in the Loop</h4><form class="newsletter-form" onsubmit="event.preventDefault();this.querySelector('input').value='Subscribed ✓';this.querySelector('button').textContent='Done'"><input type="email" placeholder="Your email address" required><button type="submit">Subscribe</button></form></div>
+    <div class="footer-social"><h4>Follow Us</h4><div class="social-icons">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.8L16 20h4l-7-8.5L19.5 4H18l-5 6.2L9 4H4z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48"/></svg></a>
+    </div></div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 NŪRA. All rights reserved.</div>
 </footer>
 
-    <script>
-        lucide.createIcons({
-            attrs: {
-                strokeWidth: 1.5
-            }
-        });
-        
-        // Simple scroll to anchor behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+<!-- PRODUCT DETAIL PAGES (GOATLIFE CLONE) -->
+<div class="pdp-overlay" id="pdp-1">
+  <button class="pdp-close" onclick="closePDP()">&times;</button>
+  <div class="pdp-hero">
+    <div class="pdp-gallery">
+      <img src="https://images.pexels.com/photos/1346215/pexels-photo-1346215.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Protein Power Blend" class="pdp-gallery-main">
+      <div class="pdp-gallery-thumbs">
+        <img src="https://images.pexels.com/photos/1346215/pexels-photo-1346215.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1585250007802-bd977ee0cd25?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1621317070105-0453de2b45e9?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1498837167922-41c543cb242f?w=200&h=200&fit=crop&q=80" alt="Thumb">
+      </div>
+    </div>
+    <div class="pdp-details">
+      <h1 class="pdp-title">Protein Power Blend</h1>
+      <div class="pdp-price">₹1,299.00</div>
+      <div class="pdp-tax">Taxes included.</div>
+      <div class="pdp-actions">
+        <button class="pdp-btn-cart">ADD TO CART</button>
+        <button class="pdp-btn-buy">BUY IT NOW</button>
+      </div>
+      <div class="pdp-accordion">
+        <div class="pdp-accordion-item active">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Product description</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>25g of clean, plant-based protein per serving.<br><br>No fillers, no bloating, no artificial flavors. Just pure fuel for your body — designed for athletes, professionals, and anyone who refuses to compromise on quality.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Shipping</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Free shipping on orders above ₹499. Standard delivery within 3-5 business days. Express delivery available at checkout.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Returns</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Easy 7-day returns — no questions asked.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</body></html>
+  <div class="pdp-ingredients">
+    <h2 class="pdp-ing-title">Ingredients</h2>
+    <div class="pdp-ing-slider">
+      <div class="pdp-ing-card">
+        <h4>Pea Protein</h4>
+        <img src="https://images.unsplash.com/photo-1594951111690-3fb1c1ea354c?w=400&h=400&fit=crop" alt="Pea Protein">
+        <p>Premium plant isolate.<br>Complete amino acid profile.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Coconut MCT</h4>
+        <img src="https://images.unsplash.com/photo-1550505096-7bbef60f4eaf?w=400&h=400&fit=crop" alt="Coconut MCT">
+        <p>Brain energy & focus.<br>Burns fat instead of storing it.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Raw Cacao</h4>
+        <img src="https://images.unsplash.com/photo-1615486171448-4fdcb5dfcc76?w=400&h=400&fit=crop" alt="Raw Cacao">
+        <p>Antioxidant powerhouse.<br>Naturally rich chocolate flavor.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Stevia Extract</h4>
+        <img src="https://images.unsplash.com/photo-1520614138138-0348a47dd10e?w=400&h=400&fit=crop" alt="Stevia Extract">
+        <p>Natural sweetness that gives energy,<br>not a sugar crash.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdp-goated">
+    <h2>THE NŪRA WAY TO FUEL</h2>
+    <div class="pdp-goated-grid">
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+        <div class="pdp-goated-text">25g Protein</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></div>
+        <div class="pdp-goated-text">No Added Sugar</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+        <div class="pdp-goated-text">Great Value</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+        <div class="pdp-goated-text">Lab Tested</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDP 2 -->
+<div class="pdp-overlay" id="pdp-2">
+  <button class="pdp-close" onclick="closePDP()">&times;</button>
+  <div class="pdp-hero">
+    <div class="pdp-gallery">
+      <img src="https://images.pexels.com/photos/4099238/pexels-photo-4099238.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Golden Energy Bites" class="pdp-gallery-main">
+      <div class="pdp-gallery-thumbs">
+        <img src="https://images.pexels.com/photos/4099238/pexels-photo-4099238.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1549480112-9c17dfce7a9d?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1498837167922-41c543cb242f?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1585250007802-bd977ee0cd25?w=200&h=200&fit=crop&q=80" alt="Thumb">
+      </div>
+    </div>
+    <div class="pdp-details">
+      <h1 class="pdp-title">Golden Energy Bites</h1>
+      <div class="pdp-price">₹899.00</div>
+      <div class="pdp-tax">Taxes included.</div>
+      <div class="pdp-actions">
+        <button class="pdp-btn-cart">ADD TO CART</button>
+        <button class="pdp-btn-buy">BUY IT NOW</button>
+      </div>
+      <div class="pdp-accordion">
+        <div class="pdp-accordion-item active">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Product description</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Sustained energy from dates, nuts, seeds, and adaptogens.<br><br>No refined sugar, no crash. Each bite delivers clean fuel for your busiest days — whether it's a gym session, a board meeting, or a busy school run.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Shipping</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Free shipping on orders above ₹499. Standard delivery within 3-5 business days. Express delivery available at checkout.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Returns</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Easy 7-day returns — no questions asked.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdp-ingredients">
+    <h2 class="pdp-ing-title">Ingredients</h2>
+    <div class="pdp-ing-slider">
+      <div class="pdp-ing-card">
+        <h4>Medjool Dates</h4>
+        <img src="https://images.unsplash.com/photo-1596706911571-0f73315a6bfa?w=400&h=400&fit=crop" alt="Dates">
+        <p>Nature's caramel.<br>Sustained energy release.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Almonds</h4>
+        <img src="https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=400&h=400&fit=crop" alt="Almonds">
+        <p>Healthy fats & crunch.<br>Keeps you full longer.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Ashwagandha</h4>
+        <img src="https://images.unsplash.com/photo-1615486171448-4fdcb5dfcc76?w=400&h=400&fit=crop" alt="Ashwagandha">
+        <p>Adaptogenic stress relief.<br>Calm, sustained focus.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Chia Seeds</h4>
+        <img src="https://images.unsplash.com/photo-1506086202517-8e100f91ab77?w=400&h=400&fit=crop" alt="Chia">
+        <p>Omega-3 powerhouse.<br>For smoother digestion.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdp-goated">
+    <h2>THE NŪRA WAY TO FUEL</h2>
+    <div class="pdp-goated-grid">
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+        <div class="pdp-goated-text">Sustained Energy</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></div>
+        <div class="pdp-goated-text">No Refined Sugar</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+        <div class="pdp-goated-text">12 Per Pack</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg></div>
+        <div class="pdp-goated-text">Instant Snack</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDP 3 -->
+<div class="pdp-overlay" id="pdp-3">
+  <button class="pdp-close" onclick="closePDP()">&times;</button>
+  <div class="pdp-hero">
+    <div class="pdp-gallery">
+      <img src="https://images.pexels.com/photos/5946081/pexels-photo-5946081.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Green Vitality Mix" class="pdp-gallery-main">
+      <div class="pdp-gallery-thumbs">
+        <img src="https://images.pexels.com/photos/5946081/pexels-photo-5946081.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1621317070105-0453de2b45e9?w=200&h=200&fit=crop&q=80" alt="Thumb">
+        <img src="https://images.unsplash.com/photo-1498837167922-41c543cb242f?w=200&h=200&fit=crop&q=80" alt="Thumb">
+      </div>
+    </div>
+    <div class="pdp-details">
+      <h1 class="pdp-title">Green Vitality Mix</h1>
+      <div class="pdp-price">₹1,099.00</div>
+      <div class="pdp-tax">Taxes included.</div>
+      <div class="pdp-actions">
+        <button class="pdp-btn-cart">ADD TO CART</button>
+        <button class="pdp-btn-buy">BUY IT NOW</button>
+      </div>
+      <div class="pdp-accordion">
+        <div class="pdp-accordion-item active">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Product description</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>12 organic supergreens in every scoop. Spirulina, moringa, wheatgrass, chlorella, and more.<br><br>Mixes instantly with no clumps. 30 servings per jar.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Shipping</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Free shipping on orders above ₹499. Standard delivery within 3-5 business days. Express delivery available at checkout.</p></div></div>
+        </div>
+        <div class="pdp-accordion-item">
+          <button class="pdp-accordion-btn" onclick="toggleAccordion(this)">
+            <div class="pdp-accordion-btn-inner"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Returns</div>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="pdp-accordion-content"><div class="pdp-accordion-inner"><p>Easy 7-day returns — no questions asked.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdp-ingredients">
+    <h2 class="pdp-ing-title">Ingredients</h2>
+    <div class="pdp-ing-slider">
+      <div class="pdp-ing-card">
+        <h4>Spirulina</h4>
+        <img src="https://images.unsplash.com/photo-1615486171448-4fdcb5dfcc76?w=400&h=400&fit=crop" alt="Spirulina">
+        <p>Immunity booster.<br>Nature's multi-vitamin.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Moringa</h4>
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=400&fit=crop" alt="Moringa">
+        <p>Reduces inflammation.<br>Packed with antioxidants.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Wheatgrass</h4>
+        <img src="https://images.unsplash.com/photo-1596706911571-0f73315a6bfa?w=400&h=400&fit=crop" alt="Wheatgrass">
+        <p>Alkalizing superfood.<br>Energy without caffeine.</p>
+      </div>
+      <div class="pdp-ing-card">
+        <h4>Matcha</h4>
+        <img src="https://images.unsplash.com/photo-1582787093202-b2d9f8c6ebc4?w=400&h=400&fit=crop" alt="Matcha">
+        <p>Calm, focused energy.<br>Boosts metabolism naturally.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pdp-goated">
+    <h2>THE NŪRA WAY TO FUEL</h2>
+    <div class="pdp-goated-grid">
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+        <div class="pdp-goated-text">Daily Detox</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></div>
+        <div class="pdp-goated-text">No Grassy Taste</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+        <div class="pdp-goated-text">Immune Support</div>
+      </div>
+      <div class="pdp-goated-item">
+        <div class="pdp-goated-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+        <div class="pdp-goated-text">Instant Prep</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+// Scroll progress
+window.addEventListener('scroll',function(){
+  var h=document.documentElement,b=document.body;
+  var st=h.scrollTop||b.scrollTop,sh=(h.scrollHeight||b.scrollHeight)-h.clientHeight;
+  document.getElementById('scrollProgress').style.width=(st/sh*100)+'%';
+});
+// Nav scroll
+var nav=document.getElementById('mainNav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60)});
+// Mobile menu
+var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',function(){mm.classList.add('open')});
+document.getElementById('mobileClose').addEventListener('click',function(){mm.classList.remove('open')});
+document.querySelectorAll('.mobile-link').forEach(function(l){l.addEventListener('click',function(){mm.classList.remove('open')})});
+// Reveal observer
+var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
+// Video play
+var pb=document.getElementById('playBtn'),sv=document.querySelector('#storyVideo video');
+if(pb&&sv){
+  pb.addEventListener('click',function(){sv.play();pb.classList.add('hidden')});
+  sv.addEventListener('pause',function(){pb.classList.remove('hidden')});
+  sv.addEventListener('ended',function(){pb.classList.remove('hidden')});
+  sv.addEventListener('click',function(){if(!sv.paused)sv.pause()});
+}
+// Carousel
+var track=document.getElementById('carouselTrack'),dots=document.querySelectorAll('#carouselDots button'),cs=0,ts=3,ai;
+function go(n){cs=n;track.style.transform='translateX(-'+n*100+'%)';dots.forEach(function(d,i){d.classList.toggle('active',i===n)})}
+dots.forEach(function(d){d.addEventListener('click',function(){go(parseInt(this.dataset.index));clearInterval(ai);ai=setInterval(function(){go((cs+1)%ts)},5e3)})});
+ai=setInterval(function(){go((cs+1)%ts)},5e3);
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}})});
+// Hero parallax
+window.addEventListener('scroll',function(){var h=document.querySelector('.hero-content');if(h){var s=window.scrollY;if(s<window.innerHeight){h.style.transform='translateY('+s*0.25+'px)';h.style.opacity=1-s/(window.innerHeight*0.7)}}});
+// Mobile video disable
+if(window.innerWidth<768){var hv=document.querySelector('.hero-video-bg video');if(hv){hv.removeAttribute('autoplay');hv.pause()}}
+// PDP (Product Detail Page) logic
+var cards=document.querySelectorAll('.product-card');
+cards.forEach(function(card,i){
+  card.addEventListener('click',function(e){
+    if(e.target.closest('.btn-cart'))return;
+    openPDP(i+1);
+  });
+});
+})();
+function openPDP(id){
+  var el=document.getElementById('pdp-'+id);
+  if(el){el.classList.add('open');el.scrollTop=0;document.body.style.overflow='hidden';}
+}
+function closePDP(){
+  document.querySelectorAll('.pdp-overlay').forEach(function(o){o.classList.remove('open')});
+  document.body.style.overflow='';
+}
+function changeQty(btn,delta){
+  var span=btn.parentElement.querySelector('span');
+  var v=parseInt(span.textContent)+delta;
+  if(v<1)v=1;if(v>10)v=10;
+  span.textContent=v;
+}
+function toggleAccordion(btn){
+  var item=btn.parentElement;
+  item.classList.toggle('active');
+}
+</script>
+</body>
+</html>
