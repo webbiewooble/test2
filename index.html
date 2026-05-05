@@ -52,41 +52,79 @@
       <div class="flex justify-between items-center h-16">
         <!-- Mobile Menu -->
         <div class="flex items-center lg:hidden">
-          <button class="p-2 text-gray-600 hover:text-black">
+          <button id="open-menu" class="p-2 -ml-2 text-gray-600 hover:text-black">
             <i data-lucide="menu" class="h-6 w-6"></i>
           </button>
-          <button class="p-2 text-gray-600 hover:text-black ml-2">
+          <button class="p-2 sm:ml-2 text-gray-600 hover:text-black">
             <i data-lucide="search" class="h-5 w-5"></i>
           </button>
         </div>
 
         <!-- Desktop Links -->
         <div class="hidden lg:flex items-center space-x-8">
-          <a href="#" class="text-xs font-semibold text-black tracking-widest uppercase relative after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-black after:transition-all after:duration-300 hover:opacity-70 transition-opacity">AUDIO</a>
-          <a href="#" class="text-xs font-semibold text-black tracking-widest uppercase relative after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-black after:transition-all after:duration-300 hover:opacity-70 transition-opacity">WEARABLES</a>
+          <!-- Audio Dropdown -->
+          <div class="group relative">
+            <button class="text-xs font-semibold text-black tracking-widest uppercase flex items-center py-6 hover:opacity-70 transition-opacity">
+              AUDIO <i data-lucide="chevron-down" class="w-3 h-3 ml-1 transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-full mt-[-8px] w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
+              <div class="py-2">
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Headphones</a>
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Earbuds</a>
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Speakers</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Wearables Dropdown -->
+          <div class="group relative">
+            <button class="text-xs font-semibold text-black tracking-widest uppercase flex items-center py-6 hover:opacity-70 transition-opacity">
+              WEARABLES <i data-lucide="chevron-down" class="w-3 h-3 ml-1 transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-full mt-[-8px] w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
+              <div class="py-2">
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Smartwatches</a>
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Fitness Bands</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessories Dropdown -->
+          <div class="group relative">
+            <button class="text-xs font-semibold text-black tracking-widest uppercase flex items-center py-6 hover:opacity-70 transition-opacity">
+              ACCESSORIES <i data-lucide="chevron-down" class="w-3 h-3 ml-1 transition-transform group-hover:rotate-180"></i>
+            </button>
+            <div class="absolute left-0 top-full mt-[-8px] w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50">
+              <div class="py-2">
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Chargers</a>
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Cables</a>
+                <a href="#" class="block px-6 py-3 text-xs tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 uppercase">Cases</a>
+              </div>
+            </div>
+          </div>
+
           <a href="#" class="text-xs font-semibold text-red-600 tracking-widest uppercase relative after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-red-600 after:transition-all after:duration-300 hover:opacity-70 transition-opacity">SALE</a>
-          <a href="#" class="text-xs font-semibold text-black tracking-widest uppercase relative after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-black after:transition-all after:duration-300 hover:opacity-70 transition-opacity">NEW</a>
         </div>
 
         <!-- Logo -->
-        <div class="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
-          <a href="#" class="text-2xl md:text-3xl font-extrabold tracking-tighter text-black">
+        <div class="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 w-[55%] md:w-auto">
+          <a href="#" class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tighter text-black whitespace-nowrap truncate w-full text-center">
             THE GADGET STORE
           </a>
         </div>
 
         <!-- Icons -->
-        <div class="flex items-center space-x-4 md:space-x-6">
+        <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
           <button class="hidden lg:block p-2 text-gray-600 hover:text-black">
             <i data-lucide="search" class="h-5 w-5"></i>
           </button>
           <button class="hidden lg:block p-2 text-gray-600 hover:text-black">
             <i data-lucide="user" class="h-5 w-5"></i>
           </button>
-          <button class="p-2 text-gray-600 hover:text-black">
+          <button class="hidden sm:block p-2 text-gray-600 hover:text-black">
             <i data-lucide="heart" class="h-5 w-5"></i>
           </button>
-          <button class="p-2 text-gray-600 hover:text-black relative">
+          <button class="p-2 -mr-2 sm:mr-0 text-gray-600 hover:text-black relative">
             <i data-lucide="shopping-bag" class="h-5 w-5"></i>
             <span class="absolute top-1 right-1 bg-black text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
               0
@@ -96,6 +134,71 @@
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-black/50 opacity-0 invisible transition-all duration-300">
+    <div id="mobile-menu-drawer" class="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-white transform -translate-x-full transition-transform duration-300 p-6 flex flex-col">
+      <div class="flex justify-between items-center mb-8">
+        <a href="#" class="text-xl font-extrabold tracking-tighter text-black">
+          THE GADGET STORE
+        </a>
+        <button id="close-menu" class="p-2 -mr-2 text-gray-600 hover:text-black">
+          <i data-lucide="x" class="h-6 w-6"></i>
+        </button>
+      </div>
+      
+      <div class="flex flex-col space-y-6 overflow-y-auto hide-scrollbar">
+        <!-- Audio -->
+        <div class="border-b border-gray-100 pb-4">
+          <button class="flex justify-between items-center w-full text-sm font-semibold tracking-widest uppercase" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.chevron').classList.toggle('rotate-180')">
+            AUDIO
+            <i data-lucide="chevron-down" class="w-4 h-4 chevron transition-transform duration-300"></i>
+          </button>
+          <div class="hidden mt-4 flex-col space-y-4 pl-4">
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Headphones</a>
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Earbuds</a>
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Speakers</a>
+          </div>
+        </div>
+
+        <!-- Wearables -->
+        <div class="border-b border-gray-100 pb-4">
+          <button class="flex justify-between items-center w-full text-sm font-semibold tracking-widest uppercase" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.chevron').classList.toggle('rotate-180')">
+            WEARABLES
+            <i data-lucide="chevron-down" class="w-4 h-4 chevron transition-transform duration-300"></i>
+          </button>
+          <div class="hidden mt-4 flex-col space-y-4 pl-4">
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Smartwatches</a>
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Fitness Bands</a>
+          </div>
+        </div>
+
+        <!-- Accessories -->
+        <div class="border-b border-gray-100 pb-4">
+          <button class="flex justify-between items-center w-full text-sm font-semibold tracking-widest uppercase" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.chevron').classList.toggle('rotate-180')">
+            ACCESSORIES
+            <i data-lucide="chevron-down" class="w-4 h-4 chevron transition-transform duration-300"></i>
+          </button>
+          <div class="hidden mt-4 flex-col space-y-4 pl-4">
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Chargers</a>
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Cables</a>
+            <a href="#" class="text-sm font-medium text-gray-600 hover:text-black uppercase">Cases</a>
+          </div>
+        </div>
+
+        <a href="#" class="text-sm font-semibold text-red-600 tracking-widest uppercase pb-4 border-b border-gray-100">SALE</a>
+      </div>
+
+      <div class="mt-auto pt-8 border-t border-gray-100 flex flex-col space-y-6">
+        <a href="#" class="flex items-center text-sm font-semibold tracking-widest uppercase text-gray-900 group">
+          <i data-lucide="user" class="w-5 h-5 mr-3 text-gray-500 group-hover:text-black transition-colors"></i> ACCOUNT
+        </a>
+        <a href="#" class="flex items-center text-sm font-semibold tracking-widest uppercase text-gray-900 group">
+          <i data-lucide="heart" class="w-5 h-5 mr-3 text-gray-500 group-hover:text-black transition-colors"></i> WISHLIST
+        </a>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- Hero Banner -->
@@ -204,7 +307,7 @@
           <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tight">Trending Now</h2>
           <a href="#" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
         </div>
-        <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
           <!-- Product 1 -->
           <div class="group flex flex-col cursor-pointer">
             <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
@@ -249,6 +352,49 @@
               </div>
             </div>
           </div>
+          <!-- Product 3 -->
+          <div class="group flex flex-col cursor-pointer">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">BEST SELLER</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=600&auto=format&fit=crop" alt="Portable Bluetooth Speaker" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1589003071536-41f237bf361c?q=80&w=600&auto=format&fit=crop" alt="Portable Bluetooth Speaker" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Portable Bluetooth Speaker</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 3,499</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 6,999</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </div>
+          <!-- Product 4 -->
+          <div class="group flex flex-col cursor-pointer">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1616140683059-47864dd12b1a?q=80&w=600&auto=format&fit=crop" alt="Fast Charging Adapter" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=600&auto=format&fit=crop" alt="Fast Charging Adapter" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Fast Charging Adapter</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 999</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 1,999</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -274,7 +420,7 @@
           <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tight">New Arrivals</h2>
           <a href="#" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
         </div>
-        <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
           <!-- Product 1 -->
           <div class="group flex flex-col cursor-pointer">
             <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
@@ -315,6 +461,50 @@
               <div class="flex items-center gap-2.5 flex-wrap">
                 <span class="text-sm md:text-base font-semibold text-black">₹ 1,299</span>
                 <span class="text-xs md:text-sm text-gray-400 line-through">₹ 2,599</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div class="group flex flex-col cursor-pointer">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1629851441773-45f8f533bfd3?q=80&w=600&auto=format&fit=crop" alt="Braided USB-C Cable" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1549467657-43ca0fc6f920?q=80&w=600&auto=format&fit=crop" alt="Braided USB-C Cable" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Braided USB-C Cable</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 499</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 999</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </div>
+          <!-- Product 4 -->
+          <div class="group flex flex-col cursor-pointer">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1603539947678-eb34d4a3ebcd?q=80&w=600&auto=format&fit=crop" alt="Rugged Armor Case" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1586523996500-20e3ad5d3ebd?q=80&w=600&auto=format&fit=crop" alt="Rugged Armor Case" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Rugged Armor Case</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 799</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 1,599</span>
                 <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
               </div>
             </div>
@@ -389,6 +579,33 @@
       currentIndex = (currentIndex + 1) % announcements.length;
       bar.innerText = announcements[currentIndex];
     }, 3000);
+    // Mobile Menu Logic
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+    const openMenuBtn = document.getElementById('open-menu');
+    const closeMenuBtn = document.getElementById('close-menu');
+
+    function openMenu() {
+      mobileMenu.classList.remove('opacity-0', 'invisible');
+      mobileMenu.classList.add('opacity-100', 'visible');
+      mobileMenuDrawer.classList.remove('-translate-x-full');
+      mobileMenuDrawer.classList.add('translate-x-0');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('opacity-100', 'visible');
+      mobileMenu.classList.add('opacity-0', 'invisible');
+      mobileMenuDrawer.classList.remove('translate-x-0');
+      mobileMenuDrawer.classList.add('-translate-x-full');
+      document.body.style.overflow = '';
+    }
+
+    openMenuBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
   </script>
 </body>
 </html>
