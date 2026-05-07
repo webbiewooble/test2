@@ -683,6 +683,7 @@
             <li><a href="#" class="hover:text-white transition-colors">Shipping Policy</a></li>
             <li><a href="#" class="hover:text-white transition-colors">FAQs</a></li>
             <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+            <li><button onclick="openAboutModal()" class="hover:text-white transition-colors text-left w-full">About Us</button></li>
           </ul>
         </div>
       </div>
@@ -698,6 +699,71 @@
       </div>
     </div>
   </footer>
+
+  <!-- About Us Modal -->
+  <div id="about-us-modal" class="fixed inset-0 z-[70] hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-white max-w-2xl w-full p-8 rounded-lg overflow-y-auto max-h-[90vh] text-black">
+      <div class="flex justify-between items-center mb-6">
+        <h2 id="modal-title" class="text-xl font-bold uppercase tracking-tight">About Gadget Dunia</h2>
+        <button onclick="closeAboutModal()" class="text-gray-500 hover:text-black">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex space-x-4 mb-6 border-b border-gray-200">
+        <button onclick="showModalTab('about')" class="pb-2 text-sm font-semibold uppercase tracking-widest text-black border-b-2 border-black" id="tab-btn-about">About</button>
+        <button onclick="showModalTab('faq')" class="pb-2 text-sm font-semibold uppercase tracking-widest text-gray-500 hover:text-black" id="tab-btn-faq">FAQ</button>
+        <button onclick="showModalTab('contact')" class="pb-2 text-sm font-semibold uppercase tracking-widest text-gray-500 hover:text-black" id="tab-btn-contact">Contact Us</button>
+      </div>
+
+      <!-- About Tab -->
+      <div id="modal-content-about" class="text-gray-800 space-y-4 text-sm leading-relaxed">
+        <p>Welcome to Gadget Dunia, your one-stop destination for the latest, trending, and most innovative products in tech and lifestyle. We bring you a carefully curated collection of gadgets, accessories, and trending toys at unbeatable prices, designed to make everyday life more fun, smart, and convenient.</p>
+        <p>At Gadget Dunia, we focus on combining technology, entertainment, and affordability. From smart gadgets to viral toys, we ensure that every product adds value, excitement, or utility to your life.</p>
+        <h3 class="font-bold text-base mt-4">🚀 What We Offer</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Latest Tech Gadgets & Accessories</li>
+          <li>Smart Devices & Mobile Accessories</li>
+          <li>Audio & Wearable Tech</li>
+          <li>Content Creation Gear</li>
+          <li>🔥 Trending Toys & Fun Products</li>
+          <li>Affordable Combo Deals</li>
+          <li>Fast & Reliable Delivery</li>
+          <li>Customer Support That Cares</li>
+        </ul>
+        <h3 class="font-bold text-base mt-4">🎯 Our Mission</h3>
+        <p>To make innovation and trending lifestyle products accessible to everyone by offering high-quality, affordable, and useful items that bring joy, creativity, and convenience into daily life.</p>
+        <h3 class="font-bold text-base mt-4">💡 Why Choose Gadget Dunia?</h3>
+        <p>We don’t just sell products — we bring trending experiences. Whether it’s the latest gadget, a smart accessory, or a viral toy, every item is selected to match modern trends and real customer needs.</p>
+      </div>
+
+      <!-- FAQ Tab -->
+      <div id="modal-content-faq" class="hidden text-gray-800 space-y-4 text-sm leading-relaxed">
+        <div class="space-y-4">
+          <div><h4 class="font-bold">1. What is Gadget Dunia?</h4><p class="text-gray-600">Gadget Dunia is an online store that offers the latest gadgets, accessories, smart devices, and trending toys at affordable prices.</p></div>
+          <div><h4 class="font-bold">2. Do you provide Cash on Delivery (COD)?</h4><p class="text-gray-600">Yes, we offer Cash on Delivery (COD) on selected products across India to make your shopping experience easy and convenient. A small ₹100 advance is required for confirmation.</p></div>
+          <div><h4 class="font-bold">3. How long does delivery take?</h4><p class="text-gray-600">Delivery usually takes 5-7 working days.</p></div>
+          <div><h4 class="font-bold">4. Is your product quality good?</h4><p class="text-gray-600">Yes, we ensure good quality products tested and sourced from trusted suppliers.</p></div>
+          <div><h4 class="font-bold">5. Can I return or replace a product?</h4><p class="text-gray-600">Yes, we offer replacement for damaged or defective products. A clear 360° unboxing video is required as proof.</p></div>
+          <div><h4 class="font-bold">6. Do you offer combo deals?</h4><p class="text-gray-600">Yes, we regularly provide combo offers, festive deals, and special discounts.</p></div>
+          <div><h4 class="font-bold">7. How can I track my order?</h4><p class="text-gray-600">Once shipped, you will receive updates via WhatsApp or email.</p></div>
+          <div><h4 class="font-bold">8. Can I earn with Gadget Dunia?</h4><p class="text-gray-600">Yes! Reach out to us on WhatsApp to learn about our referral and promotion programs.</p></div>
+        </div>
+      </div>
+
+      <!-- Contact Tab -->
+      <div id="modal-content-contact" class="hidden text-gray-800 space-y-4 text-sm leading-relaxed">
+        <p class="font-semibold text-base mb-4">Still Have a Question?</p>
+        <form class="space-y-4">
+          <input type="text" placeholder="Full Name" class="w-full border border-gray-300 p-3 rounded" required />
+          <input type="tel" placeholder="WhatsApp Number" class="w-full border border-gray-300 p-3 rounded" required />
+          <textarea placeholder="Your Query" class="w-full border border-gray-300 p-3 rounded h-32" required></textarea>
+          <button type="submit" class="bg-black text-white px-6 py-3 rounded uppercase font-semibold text-sm">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Initialize Lucide icons
@@ -779,6 +845,36 @@
       document.getElementById('home-view').classList.add('hidden');
       document.getElementById('product-view').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // About Us Modal
+    function openAboutModal() {
+      // Reset to default
+      showModalTab('about');
+      document.getElementById('about-us-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeAboutModal() {
+      document.getElementById('about-us-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function showModalTab(tab) {
+      // Hide all contents
+      document.querySelectorAll('[id^="modal-content-"]').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('[id^="tab-btn-"]').forEach(el => {
+        el.classList.remove('border-b-2', 'border-black', 'text-black');
+        el.classList.add('text-gray-500');
+      });
+
+      // Show selected
+      document.getElementById('modal-content-' + tab).classList.remove('hidden');
+      document.getElementById('tab-btn-' + tab).classList.add('border-b-2', 'border-black', 'text-black');
+      document.getElementById('tab-btn-' + tab).classList.remove('text-gray-500');
+      
+      const titles = { 'about': 'About Gadget Dunia', 'faq': 'FAQ', 'contact': 'Contact Us' };
+      document.getElementById('modal-title').innerText = titles[tab];
     }
 
     // Product Page Specific Logic
