@@ -63,18 +63,18 @@
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center justify-center mx-2 text-center overflow-hidden">
           <a href="#" onclick="showHome(event)" class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tighter text-black truncate flex items-center h-full">
-            <img src="https://raw.githubusercontent.com/webbiewooble/test2/main/Banner%20and%20Logo/logo.svg" alt="THE GADGET STORE" class="h-16 w-auto" />
+            <img src="https://raw.githubusercontent.com/webbiewooble/test2/main/Banner%20and%20Logo/logo.svg" alt="THE GADGET STORE" class="h-20 w-auto" />
           </a>
         </div>
 
         <!-- Icons (Right of Logo) -->
         <div class="flex items-center space-x-1 sm:space-x-4">
-          <button class="p-2 text-gray-600 hover:text-black">
+          <button aria-label="Search" class="p-2 text-gray-600 hover:text-black" onclick="openSearchModal()">
             <i data-lucide="search" class="h-5 w-5 sm:h-6 sm:w-6"></i>
           </button>
           <button class="p-2 -mr-2 sm:mr-0 text-gray-600 hover:text-black relative">
             <i data-lucide="shopping-bag" class="h-5 w-5 sm:h-6 sm:w-6"></i>
-            <span class="absolute top-0 right-0 sm:top-1 sm:right-1 bg-black text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+            <span id="cart-count" class="absolute top-0 right-0 sm:top-1 sm:right-1 bg-black text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
               0
             </span>
           </button>
@@ -82,10 +82,10 @@
       </div>
       <!-- Navbar Links (Below Logo) -->
       <div class="hidden lg:flex justify-center items-center h-12 space-x-10 border-t border-gray-200">
-        <a href="#" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Featured</a>
-        <a href="#" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Trending</a>
-        <a href="#" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Best Sellers</a>
-        <a href="#" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">New Arrivals</a>
+        <a href="#" onclick="showCollection(event, 'Featured')" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Featured</a>
+        <a href="#" onclick="showCollection(event, 'Trending')" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Trending</a>
+        <a href="#" onclick="showCollection(event, 'Best Sellers')" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">Best Sellers</a>
+        <a href="#" onclick="showCollection(event, 'New Arrivals')" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors">New Arrivals</a>
         <div class="relative group">
           <a href="#" class="text-[11px] font-semibold text-black hover:text-gray-600 tracking-wide uppercase transition-colors flex items-center gap-1">Electronics & Accessories <i data-lucide="chevron-down" class="h-3 w-3"></i></a>
           <!-- Dropdown -->
@@ -367,49 +367,93 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-10">
           <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tight">Trending Now</h2>
-          <a href="#" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
+          <a href="#" onclick="showCollection(event, 'All Products')" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
         </div>
-        <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
-          <!-- Product 1 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
+          <!-- Product humidifier -->
+          <a href="#" onclick="showProduct(event, 'humidifier')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
               <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">BEST SELLER</div>
               <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
                 <i data-lucide="heart" class="w-4 h-4 text-black"></i>
               </button>
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop" alt="Pro Wireless Headphones" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=600&auto=format&fit=crop" alt="Pro Wireless Headphones" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1585565804112-f201f68c48b4?auto=format&fit=crop&q=80&w=800" alt="Smooth Anti Gravity Humidifier" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1585565804112-f201f68c48b4?auto=format&fit=crop&q=80&w=800" alt="Smooth Anti Gravity Humidifier" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
               <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('humidifier')">ADD TO CART</button>
               </div>
             </div>
             <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Pro Wireless Headphones</h3>
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Smooth Anti Gravity Humidifier</h3>
               <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 4,999</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 9,999</span>
+                <span class="text-sm md:text-base font-semibold text-black">₹ 1,499</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 2,999</span>
                 <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
               </div>
             </div>
           </a>
-          <!-- Product 2 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <!-- Product mousekeyboard -->
+          <a href="#" onclick="showProduct(event, 'mousekeyboard')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
               <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">TRENDING</div>
               <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
                 <i data-lucide="heart" class="w-4 h-4 text-black"></i>
               </button>
-              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=600&auto=format&fit=crop" alt="Active Smartwatch" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=600&auto=format&fit=crop" alt="Active Smartwatch" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800" alt="Multi-Purpose Wireless Mouse and Keyboard Kit" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800" alt="Multi-Purpose Wireless Mouse and Keyboard Kit" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
               <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('mousekeyboard')">ADD TO CART</button>
               </div>
             </div>
             <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Active Smartwatch</h3>
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Wireless Mouse & Keyboard Kit</h3>
               <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 2,499</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 4,999</span>
+                <span class="text-sm md:text-base font-semibold text-black">₹ 1,199</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 2,399</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </a>
+          <!-- Product applewatchultra -->
+          <a href="#" onclick="showProduct(event, 'applewatchultra')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">HOT</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&q=80&w=800" alt="Apple Watch Ultra" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&q=80&w=800" alt="Apple Watch Ultra" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('applewatchultra')">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Apple Watch Ultra</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 2,999</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 5,999</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </a>
+          <!-- Product jblflip6 -->
+          <a href="#" onclick="showProduct(event, 'jblflip6')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">BEST SELLER</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1608223652613-2dfc6fc2e389?auto=format&fit=crop&q=80&w=800" alt="JBL Flip 6" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1608223652613-2dfc6fc2e389?auto=format&fit=crop&q=80&w=800" alt="JBL Flip 6" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('jblflip6')">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">JBL Flip 6+ Wireless</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 2,199</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 4,399</span>
                 <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
               </div>
             </div>
@@ -420,8 +464,8 @@
 
     <!-- Promo Banner -->
     <div class="py-16 md:py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative w-full h-[50vh] md:h-[60vh] overflow-hidden bg-gray-900 flex items-center justify-center">
+      <div class="w-full">
+        <div class="relative w-full h-[60vh] md:h-[75vh] overflow-hidden bg-gray-900 flex items-center justify-center">
           <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=2000&auto=format&fit=crop" alt="The Gadget Store Collab" class="absolute inset-0 w-full h-full object-cover opacity-60" referrerpolicy="no-referrer" />
           <div class="relative z-10 text-center px-4">
             <h2 class="text-[clamp(2.5rem,6vw,5rem)] font-extrabold text-white uppercase tracking-tighter leading-[1.05] mb-6">The Tech Edit</h2>
@@ -437,49 +481,93 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-10">
           <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-tight">New Arrivals</h2>
-          <a href="#" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
+          <a href="#" onclick="showCollection(event, 'All Products')" class="text-xs font-semibold tracking-wider uppercase border-b border-black pb-0.5 hover:opacity-70 transition-opacity">VIEW ALL</a>
         </div>
-        <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
-          <!-- Product 1 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
+          <!-- Product magiccar -->
+          <a href="#" onclick="showProduct(event, 'magiccar')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
               <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
               <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
                 <i data-lucide="heart" class="w-4 h-4 text-black"></i>
               </button>
-              <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=600&auto=format&fit=crop" alt="Noise Cancelling Earbuds" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?q=80&w=600&auto=format&fit=crop" alt="Noise Cancelling Earbuds" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800" alt="Magic Induction Line Follower Car" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800" alt="Magic Induction Line Follower Car" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
               <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('magiccar')">ADD TO CART</button>
               </div>
             </div>
             <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Noise Cancelling Earbuds</h3>
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Magic Induction Car</h3>
               <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 1,999</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 3,999</span>
+                <span class="text-sm md:text-base font-semibold text-black">₹ 699</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 1,399</span>
                 <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
               </div>
             </div>
           </a>
-          <!-- Product 2 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+          <!-- Product combokit -->
+          <a href="#" onclick="showProduct(event, 'combokit')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
               <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
               <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
                 <i data-lucide="heart" class="w-4 h-4 text-black"></i>
               </button>
-              <img src="https://images.unsplash.com/photo-1557438159-51eecce89612?q=80&w=600&auto=format&fit=crop" alt="Fitness Smart Band" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?q=80&w=600&auto=format&fit=crop" alt="Fitness Smart Band" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1584006682522-dc17d6c0d9ac?auto=format&fit=crop&q=80&w=800" alt="Multifunctional Combo Kit" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1584006682522-dc17d6c0d9ac?auto=format&fit=crop&q=80&w=800" alt="Multifunctional Combo Kit" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
               <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('combokit')">ADD TO CART</button>
               </div>
             </div>
             <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Fitness Smart Band</h3>
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Multifunctional Combo Kit</h3>
               <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 1,299</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 2,599</span>
+                <span class="text-sm md:text-base font-semibold text-black">₹ 899</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 1,799</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </a>
+          <!-- Product airpodspro3 -->
+          <a href="#" onclick="showProduct(event, 'airpodspro3')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=800" alt="AirPods Pro 3" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=800" alt="AirPods Pro 3" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('airpodspro3')">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">AirPods Pro 3</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 2,799</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 5,599</span>
+                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+              </div>
+            </div>
+          </a>
+          <!-- Product earpods -->
+          <a href="#" onclick="showProduct(event, 'earpods')" class="group flex flex-col cursor-pointer block">
+            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
+              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
+              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
+                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+              </button>
+              <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&q=80&w=800" alt="Apple Type-C EarPods" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+              <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&q=80&w=800" alt="Apple Type-C EarPods" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); addToCart('earpods')">ADD TO CART</button>
+              </div>
+            </div>
+            <div class="flex flex-col mt-2">
+              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Apple Type-C EarPods</h3>
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="text-sm md:text-base font-semibold text-black">₹ 999</span>
+                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 1,999</span>
                 <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
               </div>
             </div>
@@ -495,9 +583,9 @@
       <div class="flex items-center space-x-2 text-xs text-gray-500 mb-8 uppercase tracking-widest font-medium">
         <a href="#" onclick="showHome(event)" class="hover:text-black">Home</a>
         <span>/</span>
-        <a href="#" class="hover:text-black">Audio Devices</a>
+        <a href="#" class="hover:text-black" id="product-category-crumb">Trending</a>
         <span>/</span>
-        <span class="text-black">Pro Wireless Headphones</span>
+        <span class="text-black" id="product-title-crumb">Pro Wireless Headphones</span>
       </div>
 
       <!-- Product Layout -->
@@ -528,7 +616,7 @@
 
         <!-- Product Details -->
         <div class="flex flex-col">
-          <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-black mb-2">Pro Wireless Headphones</h1>
+          <h1 id="product-title" class="text-3xl md:text-4xl font-bold tracking-tight text-black mb-2">Pro Wireless Headphones</h1>
           <div class="flex items-center gap-2 mb-6">
             <div class="flex text-yellow-400">
               <i data-lucide="star" class="h-4 w-4 fill-current"></i>
@@ -541,46 +629,27 @@
           </div>
 
           <div class="flex items-end gap-3 mb-6">
-            <span class="text-2xl font-semibold text-black">₹ 4,999</span>
-            <span class="text-lg text-gray-400 line-through mb-0.5">₹ 9,999</span>
+            <span id="product-price" class="text-2xl font-semibold text-black">₹ 4,999</span>
+            <span id="product-old-price" class="text-lg text-gray-400 line-through mb-0.5">₹ 9,999</span>
             <span class="text-xs font-bold bg-red-600 text-white px-2 py-1 uppercase tracking-wider mb-1">50% OFF</span>
           </div>
-          
-          <p class="text-gray-600 text-sm leading-relaxed mb-8">
-            Experience premium sound quality with the Pro Wireless Headphones. Featuring active noise cancellation, 40-hour battery life, and spatial audio support. Built for long listening sessions with memory foam ear cushions.
-          </p>
 
-          <!-- Color Selection -->
-          <div class="mb-8">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-semibold uppercase tracking-widest text-black">Color: <span class="font-normal text-gray-600 ml-1" id="selected-color">Matte Black</span></span>
-            </div>
-            <div class="flex gap-3">
-              <button class="w-9 h-9 rounded-full bg-black ring-2 ring-offset-2 ring-black flex items-center justify-center p-0.5" onclick="selectColor(this, 'Matte Black')">
-              </button>
-              <button class="w-9 h-9 rounded-full bg-gray-200 ring-1 ring-offset-2 ring-transparent flex items-center justify-center p-0.5 hover:ring-gray-300" onclick="selectColor(this, 'Silver')">
-              </button>
-              <button class="w-9 h-9 rounded-full bg-blue-900 ring-1 ring-offset-2 ring-transparent flex items-center justify-center p-0.5 hover:ring-gray-300" onclick="selectColor(this, 'Midnight Blue')">
-              </button>
-            </div>
-          </div>
-
-          <!-- Quantity & Add to Cart -->
-          <div class="flex flex-col sm:flex-row gap-4 mb-10">
-            <div class="flex border border-gray-300 h-14 w-full sm:w-32 flex-shrink-0">
-              <button class="w-10 flex items-center justify-center text-gray-500 hover:text-black transition-colors" onclick="updateQuantity(-1)">
-                <i data-lucide="minus" class="h-4 w-4"></i>
-              </button>
-              <input type="number" id="qty" value="1" min="1" class="flex-1 text-center font-semibold text-sm appearance-none focus:outline-none" readonly />
-              <button class="w-10 flex items-center justify-center text-gray-500 hover:text-black transition-colors" onclick="updateQuantity(1)">
-                <i data-lucide="plus" class="h-4 w-4"></i>
+          <!-- Quantity & Actions -->
+          <div class="flex flex-col gap-4 mb-10">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button class="w-full h-14 border border-black text-black font-semibold text-sm uppercase tracking-widest hover:bg-gray-50 transition-colors flex items-center justify-center gap-2" onclick="addToCart(currentProductId)">
+                <span>Add to Cart</span>
               </button>
             </div>
             
-            <button class="flex-1 h-14 bg-black text-white font-semibold text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
-              <span>Add to Cart</span>
+            <button class="w-full h-14 bg-black text-white font-semibold text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+              <span>Buy Now</span>
             </button>
           </div>
+          
+          <p id="product-desc" class="text-gray-600 text-sm leading-relaxed mb-8">
+            Experience premium sound quality with the Pro Wireless Headphones. Featuring active noise cancellation, 40-hour battery life, and spatial audio support. Built for long listening sessions with memory foam ear cushions.
+          </p>
 
           <!-- Checkout Info -->
           <div class="grid grid-cols-2 gap-4 mb-10 border-t border-b border-gray-200 py-6">
@@ -658,51 +727,8 @@
       </div>
       <h1 class="text-3xl md:text-4xl font-bold uppercase tracking-tight mb-10" id="collection-heading">Category Name</h1>
       
-      <div class="grid grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
-          <!-- Placeholder Product 1 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
-              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
-                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
-              </button>
-              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=600&auto=format&fit=crop" alt="Category Product" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=600&auto=format&fit=crop" alt="Category Product" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
-              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
-              </div>
-            </div>
-            <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Collection Product Selection</h3>
-              <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 1,499</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 2,999</span>
-                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
-              </div>
-            </div>
-          </a>
-          <!-- Placeholder Product 2 -->
-          <a href="#" onclick="showProduct(event)" class="group flex flex-col cursor-pointer block">
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-              <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">BEST SELLER</div>
-              <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
-                <i data-lucide="heart" class="w-4 h-4 text-black"></i>
-              </button>
-              <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=600&auto=format&fit=crop" alt="Category Product" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
-              <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?q=80&w=600&auto=format&fit=crop" alt="Category Product" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
-              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault()">ADD TO CART</button>
-              </div>
-            </div>
-            <div class="flex flex-col mt-2">
-              <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">Collection Product Selection</h3>
-              <div class="flex items-center gap-2.5 flex-wrap">
-                <span class="text-sm md:text-base font-semibold text-black">₹ 1,999</span>
-                <span class="text-xs md:text-sm text-gray-400 line-through">₹ 3,999</span>
-                <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
-              </div>
-            </div>
-          </a>
+      <div id="collection-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto">
+        <!-- Products generated dynamically -->
       </div>
     </div>
   </main>
@@ -778,7 +804,7 @@
       <div id="modal-content-about" class="text-gray-800 space-y-4 text-sm leading-relaxed">
         <p>Welcome to Gadget Dunia, your one-stop destination for the latest, trending, and most innovative products in tech and lifestyle. We bring you a carefully curated collection of gadgets, accessories, and trending toys at unbeatable prices, designed to make everyday life more fun, smart, and convenient.</p>
         <p>At Gadget Dunia, we focus on combining technology, entertainment, and affordability. From smart gadgets to viral toys, we ensure that every product adds value, excitement, or utility to your life.</p>
-        <h3 class="font-bold text-base mt-4">🚀 What We Offer</h3>
+        <h3 class="font-bold text-base mt-2">🚀 What We Offer</h3>
         <ul class="list-disc pl-5 space-y-1">
           <li>Latest Tech Gadgets & Accessories</li>
           <li>Smart Devices & Mobile Accessories</li>
@@ -789,9 +815,9 @@
           <li>Fast & Reliable Delivery</li>
           <li>Customer Support That Cares</li>
         </ul>
-        <h3 class="font-bold text-base mt-4">🎯 Our Mission</h3>
+        <h3 class="font-bold text-base mt-2">🎯 Our Mission</h3>
         <p>To make innovation and trending lifestyle products accessible to everyone by offering high-quality, affordable, and useful items that bring joy, creativity, and convenience into daily life.</p>
-        <h3 class="font-bold text-base mt-4">💡 Why Choose Gadget Dunia?</h3>
+        <h3 class="font-bold text-base mt-2">💡 Why Choose Gadget Dunia?</h3>
         <p>We don’t just sell products — we bring trending experiences. Whether it’s the latest gadget, a smart accessory, or a viral toy, every item is selected to match modern trends and real customer needs.</p>
       </div>
 
@@ -799,19 +825,20 @@
       <div id="modal-content-faq" class="hidden text-gray-800 space-y-4 text-sm leading-relaxed">
         <div class="space-y-4">
           <div><h4 class="font-bold">1. What is Gadget Dunia?</h4><p class="text-gray-600">Gadget Dunia is an online store that offers the latest gadgets, accessories, smart devices, and trending toys at affordable prices.</p></div>
-          <div><h4 class="font-bold">2. Do you provide Cash on Delivery (COD)?</h4><p class="text-gray-600">Yes, we offer Cash on Delivery (COD) on selected products across India to make your shopping experience easy and convenient. A small ₹100 advance is required for confirmation.</p></div>
-          <div><h4 class="font-bold">3. How long does delivery take?</h4><p class="text-gray-600">Delivery usually takes 5-7 working days.</p></div>
-          <div><h4 class="font-bold">4. Is your product quality good?</h4><p class="text-gray-600">Yes, we ensure good quality products tested and sourced from trusted suppliers.</p></div>
-          <div><h4 class="font-bold">5. Can I return or replace a product?</h4><p class="text-gray-600">Yes, we offer replacement for damaged or defective products. A clear 360° unboxing video is required as proof.</p></div>
-          <div><h4 class="font-bold">6. Do you offer combo deals?</h4><p class="text-gray-600">Yes, we regularly provide combo offers, festive deals, and special discounts.</p></div>
-          <div><h4 class="font-bold">7. How can I track my order?</h4><p class="text-gray-600">Once shipped, you will receive updates via WhatsApp or email.</p></div>
-          <div><h4 class="font-bold">8. Can I earn with Gadget Dunia?</h4><p class="text-gray-600">Yes! Reach out to us on WhatsApp to learn about our referral and promotion programs.</p></div>
+          <div><h4 class="font-bold">2. Do you provide Cash on Delivery (COD)?</h4><p class="text-gray-600">Yes, we offer Cash on Delivery (COD) on selected products across India to make your shopping experience easy and convenient. To confirm your order and ensure faster processing, a small ₹100 advance is required, and the remaining amount can be paid safely at the time of delivery.</p></div>
+          <div><h4 class="font-bold">3. How long does delivery take?</h4><p class="text-gray-600">Delivery usually takes 5-7 working days, depending on your location and product availability.</p></div>
+          <div><h4 class="font-bold">4. Is your product quality good?</h4><p class="text-gray-600">Yes, we ensure good quality products that are tested and sourced from trusted suppliers to provide reliable performance and value.</p></div>
+          <div><h4 class="font-bold">5. Can I return or replace a product?</h4><p class="text-gray-600">Yes, we offer replacement for products that arrive damaged or defective. To ensure a smooth and fair resolution process, a clear 360° unboxing video (recorded before opening the package) is required as proof of condition.</p></div>
+          <div><h4 class="font-bold">6. Do you offer combo deals or discounts?</h4><p class="text-gray-600">Yes, we regularly provide combo offers, festive deals, and special discounts on trending products.</p></div>
+          <div><h4 class="font-bold">7. How can I track my order?</h4><p class="text-gray-600">Once your order is shipped, you will receive updates via WhatsApp or email.</p></div>
+          <div><h4 class="font-bold">8. Can I earn with Gadget Dunia?</h4><p class="text-gray-600">Yes, you can earn with Gadget Dunia by promoting our products. If you are interested in earning through referrals or promotions, simply reach out to us on WhatsApp. Our team will guide you with the complete process and help you get started step by step.</p></div>
         </div>
       </div>
 
       <!-- Contact Tab -->
       <div id="modal-content-contact" class="hidden text-gray-800 space-y-4 text-sm leading-relaxed">
         <p class="font-semibold text-base mb-4">Still Have a Question?</p>
+        <p class="text-sm text-gray-600 mb-4">If you still have any questions or need help with your order, simply fill out the form below. Our team will review your request and get back to you as soon as possible.</p>
         <form class="space-y-4">
           <input type="text" placeholder="Full Name" class="w-full border border-gray-300 p-3 rounded" required />
           <input type="tel" placeholder="WhatsApp Number" class="w-full border border-gray-300 p-3 rounded" required />
@@ -822,9 +849,58 @@
     </div>
   </div>
 
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-[80] hidden bg-white/95 backdrop-blur flex flex-col pt-20 px-4 md:px-8">
+    <div class="w-full max-w-3xl mx-auto relative flex flex-col h-full max-h-[80vh]">
+      <button onclick="closeSearchModal()" class="absolute -top-10 md:-top-16 right-0 p-2 hover:bg-gray-100 rounded-full transition-colors text-black">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="relative mb-8">
+        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-6 h-6"></i>
+        <input type="text" id="search-input" onkeyup="performSearch(this.value)" placeholder="Search products..." class="w-full text-xl md:text-3xl pl-14 pr-4 py-4 md:py-6 border-b-2 border-gray-300 focus:border-black outline-none bg-transparent placeholder-gray-300 font-medium transition-colors" autocomplete="off" />
+      </div>
+      <div id="search-results" class="flex-1 overflow-y-auto space-y-4 pb-10 custom-scrollbar">
+        <!-- Results will appear here -->
+        <p class="text-gray-500 text-center mt-10">Start typing to search...</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #d1d5db;
+    }
+  </style>
+
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    // Cart Logic
+    let cart = [];
+    let currentProductId = null;
+    function addToCart(productId) {
+      cart.push(productId);
+      updateCartCount();
+      alert('Product added to cart!');
+    }
+
+    function updateCartCount() {
+      const cartCountEl = document.getElementById('cart-count');
+      if (cartCountEl) {
+        cartCountEl.innerText = cart.length;
+      }
+    }
 
     // Announcement Bar Logic
     const announcements = [
@@ -898,8 +974,116 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showProduct(e) {
+    const PRODUCT_DB = {
+      humidifier: {
+        title: 'Smooth Anti Gravity Humidifier',
+        price: '₹ 1,499',
+        oldPrice: '₹ 2,999',
+        desc: 'Upgrade your space with the stylish and futuristic Smooth Anti Gravity Humidifier. Designed to combine beauty, relaxation, and functionality, this premium humidifier creates a stunning visual effect of water droplets flowing upward using advanced LED strobe lighting.\n\nThis ultrasonic humidifier helps add moisture to the air, improving air quality and creating a more comfortable environment for your home, office, or bedroom. It also supports aromatherapy with essential oils.\n\nKey Features:\n✔ Unique Anti-Gravity Water Droplet Effect\n✔ Ultrasonic Humidification Technology\n✔ Supports Aromatherapy with Essential Oils\n✔ Improves Air Moisture & Air Quality\n✔ Built-in Digital LED Clock\n✔ Large Water Tank Capacity',
+        category: 'Home & Office',
+        image: 'https://images.unsplash.com/photo-1585565804112-f201f68c48b4?auto=format&fit=crop&q=80&w=800'
+      },
+      gamestick: {
+        title: 'M15 Game Stick',
+        price: '₹ 1,999',
+        oldPrice: '₹ 3,999',
+        desc: 'Bring back the golden era of gaming with the M15 Game Stick. This plug-and-play retro gaming console is designed for classic game lovers who want instant fun without complicated setup.\n\nPacked with 20,000+ to 22,000+ pre-installed classic games, the M15 Game Stick supports multiple popular emulators including PS1, GB, GBA, and many more. Enjoy endless nostalgia with your favorite childhood games right on your TV.\n\nKey Features:\n✔ 20,000+ Built-in Classic Games\n✔ Supports PS1, GB, GBA & Multiple Emulators\n✔ HDMI Plug-and-Play Setup\n✔ 4K Display Support\n✔ 64GB SD Card Included\n✔ 2.4G Wireless Game Controllers',
+        category: 'Gaming',
+        image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=800'
+      },
+      magiccar: {
+        title: 'Magic Induction Line Follower Car',
+        price: '₹ 699',
+        oldPrice: '₹ 1,399',
+        desc: 'Make playtime smarter and more exciting with the Magic Induction Line Follower Car. This fun and educational toy is designed to entertain kids while boosting creativity and imagination.\n\nFeaturing Automatic Line Following Technology, simply draw a black line on paper and watch the car magically follow the path! It creates a unique interactive play experience that keeps children engaged for hours.\n\nKey Features:\n✔ Automatic Line Following Technology\n✔ Cute Cartoon Car Design\n✔ Bright Attractive Colors (Pink & Yellow)\n✔ Battery Operated for Easy Use\n✔ Safe & Kid-Friendly Material',
+        category: 'Toys',
+        image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800'
+      },
+      rccar: {
+        title: 'Little Monster Rock Crawler RC',
+        price: '₹ 1,899',
+        oldPrice: '₹ 3,799',
+        desc: 'Unleash the power of adventure with the Little Monster Rock Crawler RC. Built for speed, drifting, and off-road action, this powerful RC car is perfect for kids, hobby lovers, and remote-control car enthusiasts.\n\nDesigned with a strong Metal Body and Double Suspension System, it offers better durability, smooth movement, and stable performance on rough surfaces. Whether you\'re racing indoors or exploring outdoor tracks, this rock crawler delivers exciting drifting and off-roading fun.\n\nKey Features:\n✔ Powerful Single Remote Control\n✔ Smooth Drifting Performance\n✔ Strong Off-Roading Capability\n✔ Realistic Light & Smoke Spray Effect\n✔ Premium Durable Metal Body',
+        category: 'Toys',
+        image: 'https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=800'
+      },
+      airpodspro2: {
+        title: 'AirPods Pro 2',
+        price: '₹ 2,499',
+        oldPrice: '₹ 4,999',
+        desc: 'Experience the Daddy of All AirPods 👑 with the powerful AirPods Pro 2 (2nd Gen Type-C). Designed for premium sound lovers, these earbuds deliver top-level performance, deep bass, crystal-clear vocals, and a luxury listening experience just like the original.\n\nFeaturing Apple Care+ 2-Year Serial Number Working, Double China Pack Box, and the Topmost Premium Quality, this version offers unmatched finishing and performance. Enjoy Adaptive Noise Cancellation, Spatial Audio, and Conversation Awareness, giving you an immersive and smart audio experience for music, calls, travel, and daily use.\n\nBuilt with Wireless Charging Support, Volume Up/Down Controls, Beep Sound Function, and Same Original Ear Tips, these earbuds are made for comfort, convenience, and all-day use.\n\nAvailable Features:\n✔ Apple AirPods Pro 2nd Gen Type-C Version\n✔ Apple Care+ 2-Year Serial Number Working\n✔ Double China Premium Pack Box\n✔ Topmost Premium Quality Finish\n✔ Heavy Bass & Crystal Clear Sound\n✔ Adaptive Noise Cancellation Working\n✔ Spatial Audio Support\n✔ Conversation Awareness Feature\n✔ Same Original Soft Ear Tips\n✔ Wireless Charging Working\n✔ Volume Up / Down Control\n✔ Beep Sound Function\n✔ Perfect for Music, Calls, Travel & Gaming\n\n👑 Once you buy this quality, you’ll always ask for the same quality!',
+        category: 'Audio',
+        image: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=800'
+      },
+      mousekeyboard: {
+        title: 'Multi-Purpose Wireless Mouse and Keyboard Kit',
+        price: '₹ 1,199',
+        oldPrice: '₹ 2,399',
+        desc: 'Boost your productivity with the Multi-Purpose Wireless Mouse and Keyboard Kit. Designed for work, study, and daily use, this premium combo offers smooth performance, stylish design, and wide compatibility for all your devices.\n\nFeaturing a Dual Mode Rechargeable Mouse & Keyboard, this set provides seamless wireless connectivity and hassle-free usage without the need for constant battery replacement. The included Type-C charging support ensures fast and convenient recharging for uninterrupted performance.\n\nCompatible with Android phones, iPhone, PC, and Mac, this versatile combo is perfect for office work, online classes, business use, gaming, and travel. Its compact design and mix color options add both style and convenience to your setup.\n\nKey Features:\n✔ Dual Mode Wireless Keyboard & Mouse\n✔ Rechargeable Design – No Extra Batteries Needed\n✔ Fast Type-C Charging Support\n✔ Smooth & Silent Performance\n✔ Compatible with Android Phone\n✔ Compatible with iPhone\n✔ Compatible with PC & Mac\n✔ Stylish Mix Colour Options\n✔ Lightweight & Portable Design\n✔ Perfect for Work, Study & Daily Use\n\nA smart and stylish wireless combo built for comfort, convenience, and maximum productivity',
+        category: 'Computer Accessories',
+        image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800'
+      },
+      combokit: {
+        title: 'Multifunctional Combo Kit – Flashlight, Cigarette Lighter, Cable Set & Type-C Earphones',
+        price: '₹ 899',
+        oldPrice: '₹ 1,799',
+        desc: 'Get everyday convenience in one smart package with the Multifunctional Combo Kit. This premium combo is designed for users who want useful gadgets combined in one practical set for daily life, travel, office, and personal use.\n\nThe combo includes a powerful flashlight with an inbuilt cigarette lighter, making it perfect for emergency use and outdoor convenience. It also comes with a multiple cable set featuring a built-in phone stand, allowing easy charging and comfortable mobile viewing anytime, anywhere.\n\nTo complete the package, high-quality Type-C earphones are included for clear music, smooth calling, and daily entertainment. Stylish, practical, and highly useful—this combo kit is perfect for gifting or personal use.\n\nKey Features:\n✔ Powerful Flashlight with Bright Light Output\n✔ Inbuilt Cigarette Lighter Function\n✔ Multiple Charging Cable Set\n✔ Built-in Mobile Phone Stand\n✔ Premium Type-C Earphones Included\n✔ Perfect for Travel, Office & Daily Use\n✔ Compact, Stylish & Useful Combo Set\n✔ Ideal for Personal Use or Gift Purpose\n\nA smart all-in-one combo designed for convenience, utility, and everyday lifestyle needs.',
+        category: 'Gadgets',
+        image: 'https://images.unsplash.com/photo-1584006682522-dc17d6c0d9ac?auto=format&fit=crop&q=80&w=800'
+      },
+      applewatchultra: {
+        title: 'Apple Watch Ultra - Premium Smartwatch with Bluetooth Calling & Fitness Tracking',
+        price: '₹ 2,999',
+        oldPrice: '₹ 5,999',
+        desc: 'Upgrade your style and smart lifestyle with the Apple Watch Ultra  – 7 in 1 Strap (49MM). Designed with a premium ultra look and powerful smart features, this watch is perfect for daily wear, fitness tracking, and business use.\n\nThis model comes with 7 interchangeable straps—change your style every day of the week! The box includes 7 straps, watch protector, wireless fast charging cable, and manual book for a complete premium package.\n\nBuilt with backside real screws, secure strap locking system, ultra original wallpapers, and new watch faces, it gives the authentic luxury feel. The triple button design with working scroll ensures smooth operation and connectivity with all devices.\n\nEnjoy Bluetooth calling with call making and answering directly from your wrist, along with powerful features like phonebook, call log, dialer, calculator, notifications, calendar, alarms, and more.\n\nKey Features:\n✔ 7 in 1 Strap Series 8 Ultra (49MM)\n✔ 7 Changeable Straps Included\n✔ Watch Protector + Wireless Fast Charging Cable\n✔ Bluetooth Calling (Make & Answer Calls)\n✔ Triple Button with Working Scroll\n✔ Real Backside Screws & Secure Strap Lock\n✔ Original Ultra Wallpapers & New Faces\n✔ Heart Rate / BP / ECG + PPG Monitor\n✔ Fitness Modes with Multiple Sports Categories\n✔ Compatible with All Devices',
+        category: 'Smart Watches',
+        image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&q=80&w=800'
+      },
+      airpodspro3: {
+        title: 'AirPods Pro 3 – Premium ANC Wireless Earbuds with H2 Chip & USB-C Charging',
+        price: '₹ 2,799',
+        oldPrice: '₹ 5,599',
+        desc: 'Feel the power of crystal-clear music with the AirPods Pro 3. Designed for premium sound lovers, these earbuds deliver rich bass, sharp vocals, and an immersive listening experience in every beat.\n\nEquipped with the advanced H2 chip, Active Noise Cancellation (ANC), and Adaptive EQ, AirPods Pro 3 automatically optimize sound according to your ears for a truly personalized audio experience. Whether you\'re listening to music, taking calls, traveling, or working out, these earbuds provide smooth performance and all-day comfort.\n\nWith up to 8 hours of playtime, IP57 water resistance, and ultra-fast USB-C charging, they are built to keep up with your daily lifestyle. Stylish, lightweight, and powerful—your perfect audio companion for every moment.\n\nKey Features:\n✔ Advanced H2 Chip for Faster Performance\n✔ Active Noise Cancellation (ANC)\n✔ Adaptive EQ for Personalized Sound\n✔ Crystal Clear Audio with Deep Bass\n✔ Up to 8 Hours Playtime\n✔ IP57 Water & Sweat Resistance\n✔ Fast USB-C Charging Support\n✔ Premium Comfort Fit Design\n✔ Perfect for Music, Calls, Travel & Workouts',
+        category: 'Audio',
+        image: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=800'
+      },
+      jblflip6: {
+        title: 'JBL Flip 6+ Wireless Speaker',
+        price: '₹ 2,199',
+        oldPrice: '₹ 4,399',
+        desc: 'Enjoy powerful sound and premium build quality with the JBL Flip 6+ Wireless Speaker. Designed for music lovers who want deep bass, clear vocals, and strong wireless performance, this speaker delivers an impressive audio experience for indoor and outdoor use.\n\nBuilt with high premium quality materials and featuring Original China Packing (not local sticker packing), it offers a more authentic premium feel. The Original Dual Speakers provide louder sound output with enhanced bass and balanced stereo performance, making it perfect for parties, travel, gaming, and daily entertainment.\n\nThis Master Replica version is crafted with attention to detail, giving you the premium look, feel, and performance similar to the original at a great value.\n\nKey Features:\n✔ Original China Packing (Not Local Sticker Version)\n✔ High Premium Build Quality\n✔ Original Dual Speaker System\n✔ Powerful Bass & Clear Sound Output\n✔ Strong Wireless Bluetooth Connectivity\n✔ Portable & Stylish Design\n✔ Perfect for Indoor & Outdoor Use\n✔ Master Replica Premium Version\n\nIdeal for music, travel, parties, office, and daily entertainment—premium sound with premium style.',
+        category: 'Audio',
+        image: 'https://images.unsplash.com/photo-1608223652613-2dfc6fc2e389?auto=format&fit=crop&q=80&w=800'
+      },
+      earpods: {
+        title: 'Apple Type-C / Lightning Wired EarPods',
+        price: '₹ 999',
+        oldPrice: '₹ 1,999',
+        desc: 'Experience crystal-clear sound and premium comfort with the Apple Type-C / Lightning Wired EarPods. Designed with superb quality and powerful audio output, these earphones deliver a rich listening experience just like original handsfree.\n\nUnlike traditional round earbuds, the unique EarPods design is shaped according to ear geometry, making them more comfortable and secure for long-time use. The high-quality built-in speakers maximize sound output, giving you deep bass, clear vocals, and balanced sound for music, videos, and calls.\n\nAvailable with both Type-C Connector and Lightning Connector, these earphones are perfect for modern smartphones and devices. It also features a built-in remote and microphone, allowing you to adjust volume, control music playback, and answer or end calls easily.\n\nKey Features:\n✔ Apple OG Style Premium Packing\n✔ Superb Sound Quality with Deep Bass\n✔ Comfortable Ergonomic EarPods Design\n✔ Type-C / Lightning Connector Options\n✔ Built-in Mic for Clear Calling\n✔ Volume & Music Control Remote\n✔ Smooth Calling, Music & Video Experience\n✔ Same Like Original Handsfree Quality',
+        category: 'Audio',
+        image: 'https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&q=80&w=800'
+      }
+    };
+
+    function showProduct(e, productId) {
       if (e) e.preventDefault();
+      
+      if(productId && PRODUCT_DB[productId]) {
+        currentProductId = productId;
+        const p = PRODUCT_DB[productId];
+        document.getElementById('product-title').innerText = p.title;
+        document.getElementById('product-title-crumb').innerText = p.title;
+        document.getElementById('product-category-crumb').innerText = p.category;
+        document.getElementById('product-price').innerText = p.price;
+        document.getElementById('product-old-price').innerText = p.oldPrice;
+        document.getElementById('product-desc').innerHTML = p.desc.replace(/\n/g, '<br/>');
+        document.getElementById('main-image').src = p.image;
+        
+        // Optionally update the thumbnails or color selections based on the product.
+        // For now just update the visible thumbnails to the same image.
+        document.querySelectorAll('.aspect-square.cursor-pointer img').forEach(img => img.src = p.image);
+      }
+
       document.getElementById('home-view').classList.add('hidden');
       document.getElementById('collection-view').classList.add('hidden');
       document.getElementById('product-view').classList.remove('hidden');
@@ -918,6 +1102,40 @@
         document.getElementById('collection-heading').innerText = categoryName;
       }
       
+      const grid = document.getElementById('collection-grid');
+      grid.innerHTML = '';
+      
+      Object.keys(PRODUCT_DB).forEach(id => {
+        const p = PRODUCT_DB[id];
+        if(!categoryName || p.category === categoryName || categoryName === 'All Products') {
+          grid.innerHTML += `
+            <a href="#" onclick="showProduct(event, '${id}')" class="group flex flex-col cursor-pointer block">
+              <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4 h-full md:h-auto object-cover">
+                <div class="absolute top-2 left-2 z-10 bg-black text-white text-[0.65rem] font-semibold px-2.5 py-1 uppercase tracking-widest">NEW</div>
+                <button class="absolute top-2 right-2 z-10 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white" onclick="event.preventDefault()">
+                  <i data-lucide="heart" class="w-4 h-4 text-black"></i>
+                </button>
+                <img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" referrerpolicy="no-referrer" />
+                <img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" referrerpolicy="no-referrer" />
+                <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <button class="w-full bg-white text-black font-semibold text-xs py-3.5 uppercase tracking-widest hover:bg-black hover:text-white hover:scale-[1.02] transition-all duration-300" onclick="event.preventDefault(); event.stopPropagation(); console.log('Added to cart: ' + '${id}')">ADD TO CART</button>
+                </div>
+              </div>
+              <div class="flex flex-col mt-2">
+                <h3 class="text-sm md:text-base font-medium text-gray-700 truncate mb-1.5">${p.title}</h3>
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <span class="text-sm md:text-base font-semibold text-black">${p.price}</span>
+                  <span class="text-xs md:text-sm text-gray-400 line-through">${p.oldPrice}</span>
+                  <span class="text-[0.65rem] font-semibold tracking-widest text-red-600 uppercase">50% OFF</span>
+                </div>
+              </div>
+            </a>
+          `;
+        }
+      });
+      
+      lucide.createIcons(); // re-init icons
+      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -932,6 +1150,60 @@
     function closeAboutModal() {
       document.getElementById('about-us-modal').classList.add('hidden');
       document.body.style.overflow = '';
+    }
+
+    // Search Modal
+    function openSearchModal() {
+      document.getElementById('search-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        document.getElementById('search-input').focus();
+      }, 100);
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-results').innerHTML = '<p class="text-gray-500 text-center mt-10">Start typing to search...</p>';
+    }
+
+    function closeSearchModal() {
+      document.getElementById('search-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function performSearch(query) {
+      const resultsContainer = document.getElementById('search-results');
+      if(query.trim().length === 0) {
+        resultsContainer.innerHTML = '<p class="text-gray-500 text-center mt-10">Start typing to search...</p>';
+        return;
+      }
+      
+      const q = query.toLowerCase();
+      const matches = Object.keys(PRODUCT_DB).filter(id => {
+        const p = PRODUCT_DB[id];
+        return p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+      });
+      
+      if(matches.length === 0) {
+        resultsContainer.innerHTML = '<p class="text-gray-500 text-center mt-10">No products found for "' + query + '"</p>';
+        return;
+      }
+      
+      resultsContainer.innerHTML = matches.map(id => {
+        const p = PRODUCT_DB[id];
+        return `
+          <a href="#" onclick="closeSearchModal(); showProduct(event, '${id}')" class="flex items-center gap-4 p-4 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-gray-200">
+            <div class="h-20 w-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+              <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex flex-col flex-1 min-w-0">
+              <h4 class="text-base font-bold text-gray-900 truncate">${p.title}</h4>
+              <p class="text-sm text-gray-500 truncate mb-1">${p.category}</p>
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-black">${p.price}</span>
+                <span class="text-xs text-gray-400 line-through">${p.oldPrice}</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
     }
 
     function showModalTab(tab) {
